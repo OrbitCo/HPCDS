@@ -1,0 +1,29 @@
+﻿<h1>@ViewBag.Title</h1>
+
+@if (!(ViewBag.IsEmailConfirmed ?? false))
+{ // Step 01 - After Registration but before email is confirmed
+<p>
+    Thank you for registering for a HPCDS account. Please check your email for a message to validate your email address.
+    You will not be able to login and enter your reports until this step is completed.
+</p>
+
+    <div class="col-xs-6 col-sm-7">@Html.ActionLink("Resend", "ResendConfirmEmail", "Account", null, new { @class = "btn btn-primary" })</div>
+    @*TODO: Debug link to validate email address *@
+}
+else
+{
+    // Step 02 - Email is confirmed; Now pending approval for access
+    <p>Thank you for validating your email address for your HPCDS account.</p>
+
+    // Step 02b - from either Site Admin or Org Reporter
+    if ((ViewBag.IsOrganizationActive ?? false))
+    {
+        <p>A request has been sent to all active users within your organization to approve your account. You will receive an email with login instructions once your account is approved.​</p>
+    }
+    else
+    {
+        <p>An HPCDS administrator will review your account and you will receive an email with login instructions once your account is approved.​ For questions contact: <a href="mailto:HPCDSSupport@HPCDS.com​">HPCDSSupport@HPCDS.com</a></p>
+    }
+
+    <div class="col-xs-6 col-sm-7">@Html.ActionLink("Resend, request for access", "ResendApprovalRequestEmail", "Account", null, new { @class = "btn btn-primary" })</div>
+}

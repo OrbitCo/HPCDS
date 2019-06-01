@@ -1,0 +1,19 @@
+﻿@model string
+@{
+    var userList = new List<SelectListItem>();
+    foreach (var usr in ViewBag.members)
+    { // TODO (HPCDS-195) - should only incldue list of active memebers for the orgainzation
+        userList.Add(new SelectListItem
+        {
+            Value = usr.Id,
+            Text = String.Format("{0} {1} ({2})", usr.FirstName, usr.LastName, usr.Email)
+        });
+    }
+}
+@(Html.Kendo().ComboBoxFor(m => m)
+          .Placeholder("Select from members")
+          .HtmlAttributes(new { @class = "form-control" })
+          .Filter(FilterType.Contains)
+          .Suggest(true)
+          .BindTo(userList.OrderBy(o => o.Text))
+)

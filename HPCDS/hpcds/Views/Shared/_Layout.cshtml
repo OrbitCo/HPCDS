@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - HPCDS</title>
+    @RenderSection("metaData", required: false)
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/kendo")
+    @Styles.Render("~/Content/site")
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/kendo")
+    @using hpcds.Code.Constants
+</head>
+<body>
+    <a id="skip2content" class="sr-only sr-only-focusable" href="#content">
+        <div class="container">
+            <span class="skiplink-text">Skip to main content</span>
+        </div>
+    </a>
+    <header>
+        <!-- Title/Logo bar -->
+        <div class="row">
+            <div class="col-sm-8 company-title">
+                High Priority Chemicals Data System (HPCDS)
+            </div>
+            <div class="col-sm-3 text-right">
+                <img src="~/img/interstate.png" alt="ic2 logo">
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-md navbar-light">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link navbar-link" })
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link navbar-link dropdown-toggle @*navbar-active*@" href="#" id="navbarDdReportsMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Reports
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDdReportsMenu">
+                        @Html.ActionLink("Search Published Reports", "Index", "Search", null, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Search VT Brands and Products", "Products", "Search", null, new { @class = "dropdown-item " })
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (User.IsInRole(UserRoles.Reporters))
+                            {
+                                @Html.ActionLink("Create Report from Inventory", "Index", "Reports", null, null, fragment: "Inventory", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                                @Html.ActionLink("New Report", "New", "Reports", null, new { @class = "dropdown-item disabled" })
+                                @Html.ActionLink("View & Edit Draft Reports", "Index", "Reports", null, null, fragment: "SubmittedReports", routeValues: null, htmlAttributes: new { @class = "dropdown-item" })
+                                @Html.ActionLink("View & Copy Reports", "Index#Current", "Reports", null, new { @class = "dropdown-item disabled" })
+                            }
+
+                            if (User.IsInRole(UserRoles.StateAdmin) || User.IsInRole(UserRoles.SiteAdmin))
+                            {
+                                @Html.ActionLink("Submitted Reports", "Index", "Reports", new { area = "Submitted" }, new { @class = "dropdown-item disabled" })
+                                @Html.ActionLink("CBI Submitted Reports", "Index", "Reports", new { area = "Submitted" }, new { @class = "dropdown-item disabled" })
+                                @Html.ActionLink("Public Reports", "Index", "Reports", new { area = "Submitted" }, new { @class = "dropdown-item disabled" })
+                            }
+                            @*@Html.ActionLink("Published a reports", "Index", "Reports", new { area = "Published" }, new { @class = "dropdown-item disabled" })
+                                @Html.ActionLink("TBD, for state/site-admins", "TBD", "Manage", null, new { @class = "dropdown-item" })*@
+                        }
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link navbar-link dropdown-toggle @*navbar-active*@" href="#" id="navbarDdManageMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manage
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDdReportsMenu">
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            if (User.IsInRole(UserRoles.PendingAccess))
+                            {
+                                @Html.ActionLink("Submitted Profile", "Index", "Manage", null, new { @class = "dropdown-item" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("My Profile", "Index", "Manage", null, new { @class = "dropdown-item" })
+                                @Html.ActionLink("My Organization", "MyOrganization", "Manage", null, new { @class = "dropdown-item" })
+                            }
+                            if (User.IsInRole(UserRoles.StateAdmin) || User.IsInRole(UserRoles.SiteAdmin))
+                            {
+                                @Html.ActionLink("HPCDS Users", "Users", "Manage", null, new { @class = "dropdown-item disabled" })
+                                @Html.ActionLink("HPCDS Organizations", "Organizations", "Manage", null, new { @class = "dropdown-item disabled" })
+                                @Html.ActionLink("CBI Requests", "TBD", "Manage", null, new { @class = "dropdown-item disabled" })
+                                @Html.ActionLink("Payments", "Organization", "Manage", null, new { @class = "dropdown-item disabled" })
+                                @Html.ActionLink("Look-ups", "TBD", "Manage", null, new { @class = "dropdown-item disabled" })
+                            }
+
+                            @Html.ActionLink("Change password", "ChangePassword", "Manage", null, new { @class = "dropdown-item" })
+                            if (User.IsInRole(UserRoles.SiteAdmin))
+                            {
+                                @Html.ActionLink("Reset User Password (temp)", "SendResetLink", "Account", null, new { @class = "dropdown-item" }) @* TODO: (HPCDS-25) will be a function on Manage Users by Admins but this particular feature is only for Site Admins  *@
+                            }
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Register", "Register", "Account", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Forgot Password", "ForgotPassword", "Account", null, new { @class = "dropdown-item" })
+                        }
+
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link navbar-link dropdown-toggle" href="#" id="navbarDdHelpMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Help
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDdHelpMenu">
+                        @Html.ActionLink("FAQ", "Index", "Help", new { area = "HelpPage" }, new { @class = "dropdown-item disabled" })
+                        @Html.ActionLink("Report Problems", "Index", "Help", new { area = "HelpPage" }, new { @class = "dropdown-item disabled" })
+                        @Html.ActionLink("Resources", "Index", "Help", new { area = "HelpPage" }, new { @class = "dropdown-item disabled" })
+                        @Html.ActionLink("Contact Us", "Index", "Help", new { area = "HelpPage" }, new { @class = "dropdown-item disabled" })
+                        @*@Html.ActionLink("API Guide", "Index", "Help", new { area = "HelpPage" }, new { @class = "dropdown-item" })*@
+                    </div>
+                </li>
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </nav>
+
+    <!-- START CONTENT -->
+    <div class="hero-bg search-hero">
+        <div style="height: 55px;"></div>
+        <div id="content" class="container @(IsSectionDefined("ContainerClass") ? RenderSection("ContainerClass", false).ToString() : "col-xl-7 col-lg-9 col-md-11 col-12") @RenderSection("AddToContainerClass", false)">
+            @RenderBody()
+            @RenderSection("SPAViews", required: false)
+
+            <div id="debugging" class="small bg-dark text-warning @(IsSectionDefined("DebugMode") ? "card-body" : "col-12 collapse")" style="margin-top:5em;">
+                @Html.Raw(IsSectionDefined("DebugMode") && Context.IsDebuggingEnabled == true ? "<h4>Debug Mode</h4>" : "")
+                @RenderSection("DebugMode", required: false)
+            </div>
+
+        </div>
+    </div>
+
+    <div id="results" style="width: 100%; margin: auto;">
+        @RenderSection("ResultsViews", required: false)
+    </div>
+
+    <!-- END CONTENT -->
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div style="float: left;" class="footer-column">
+
+                <p class="footer-title footer-leftright-spacing">ABOUT US</p>
+                <p class="footer-paragraph footer-leftright-spacing">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum eget ligula at lacinia.
+                    Nam sodales, quam non placerat blandit, elit ipsum rutrum est, vel dapibus ligula risus a quam.
+                    Phasellus finibus, augue in laoreet consectetur, arcu ipsum viverra quam, vel ornare est est i
+                    d mauris. Sed lacinia lacus vitae tortor viverra, et interdum massa ullamcorper.
+                </p>
+                <div class="footer-leftright-spacing footer-top-spacing">
+                    <div class="inline-block"><img class="footer-img" src="~/img/ecology.jpg"></div>
+                    <div class="inline-block"><img class="footer-img" src="~/img/oregon.png"></div>
+                    <div class="inline-block"><img class="footer-img" src="~/img/vermont.png"></div>
+                    <p class="footer-text footer-leftright-spacing footer-top-spacing" align="left">&copy; Copyright @DateTime.Now.Year - IC2 - Ver @(typeof(hpcds.MvcApplication).Assembly.GetName().Version)</p>
+                </div>
+
+            </div>
+
+            <div style="float: right; text-align: center" class="footer-column">
+
+                <p class="footer-title footer-leftright-spacing">CONTACT US</p>
+                <p class="footer-text footer-contact-text footer-leftright-spacing">89 South Street, Suite 600</p>
+                <p class="footer-text footer-contact-text footer-leftright-spacing">Boston, MA 02111-2651</p>
+                <p class="footer-text footer-contact-text footer-leftright-spacing">(617) 367-8558</p>
+                <p class="footer-text footer-contact-text footer-leftright-spacing">Email: <a class="text-info" href="mailto:support@theic2.org">support@theic2.org</a></p>
+
+                <div class="footer-leftright-spacing">
+                    <div class="inline-block"><a href="#" class="fa fa-facebook fa-social"></a></div>
+                    <div class="inline-block"><a href="#" class="fa fa-linkedin fa-social"></a></div>
+                    <div class="inline-block"><a href="#" class="fa fa-google fa-social"></a></div>
+                </div>
+            </div>
+
+
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">var appBaseUrl = "@Url.Content("~")";</script>
+    @Scripts.Render("~/bundles/common")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

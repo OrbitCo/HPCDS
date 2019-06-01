@@ -1,0 +1,18 @@
+﻿@model int?
+@{ 
+    int pg = (ViewBag.page ?? 1) + 1;
+}
+@(Html.Kendo().DropDownListFor(m => m)
+                .DataTextField("Questions")
+                .DataValueField("ID")
+                .HtmlAttributes(new { @class = "form-control" })
+                .DataSource(source =>
+                {
+                    source
+                    .Custom().Type("odata-v4")
+                    .ServerPaging(true).PageSize(17).Page(pg)
+                    .Transport(transport => transport
+                        .Read(read => { read.Url(hpcds.Code.Constants.SystemConstants.odataUrl + "/vQuestions"); })
+                    );
+                })
+)

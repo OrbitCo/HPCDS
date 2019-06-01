@@ -1,0 +1,22 @@
+﻿@model string
+@(Html.Kendo().ComboBoxFor(m => m)
+                    .DataTextField("CountryName")
+                    .DataValueField("Code")
+                    .Placeholder("Search by name or code...")
+                    .HtmlAttributes(new { @class = "form-control" })
+                    .Filter(FilterType.Contains)
+                    .Suggest(true)
+                    .Events(e => e.Filtering("common.func.filtering.byCountryAndCode")
+                    //.Change("Country_"+tp+"_change")
+                    )
+                    .DataSource(source =>
+                    {
+                        source
+                        .Custom().Type("odata-v4")
+                        .ServerFiltering(true)
+                        .Transport(transport => transport
+                            .Read(read => { read.Url(hpcds.Code.Constants.SystemConstants.odataUrl + "/L_Country"); })
+                        );
+                    })
+                    .Template("<div class='col-8'>#: data.CountryName # (#: data.Code || 'tbd' #)</div>")
+)

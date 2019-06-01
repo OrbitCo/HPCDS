@@ -1,0 +1,6 @@
+﻿/*(HPCDS-174) tab with border override*/
+.tab-content {
+    border: 1px solid #dee2e6;
+    border-top: 0;
+    padding: 15px;
+}

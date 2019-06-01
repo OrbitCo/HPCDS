@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "Search Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.AntiForgeryToken()
+
+<h2>@ViewBag.Title</h2>
+<p>Select downloadable Excel files to view the complete data set or search by manufacturer or brand in the table below.</p>
+
+<p>@Html.ActionLink("Return to Main Search page", "Index")</p>
+
+<h3>Download</h3>
+<div class="row">
+    <div class="col-12">
+        <ul>
+            <li><a href="#" onclick="localFuncs.ExportBNPM(1, 22428, 'A-Ga')">Organization Name A-Ga</a> (22,428)</li>
+            <li><a href="#" onclick="localFuncs.ExportBNPM(22429, 129220, 'Gi-Gl')">Organization Name Gi-Gl</a> (106,791)</li>
+            <li><a href="#" onclick="localFuncs.ExportBNPM(129221, 236006, 'Gl')">Organization Name Gl</a> (106,785)</li>
+            <li><a href="#" onclick="localFuncs.ExportBNPM(236007, 237232, 'Go-Gu')">Organization Name Go-Gu</a> (1,226)</li>
+            <li><a href="#" onclick="localFuncs.ExportBNPM(237233, 249998, 'H-K')">Organization Name H-K</a> (12,766)</li>
+            <li><a href="#" onclick="localFuncs.ExportBNPM(249999, 329841, 'L-N')">Organization Name L-N</a> (79,843)</li>
+            <li><a href="#" onclick="localFuncs.ExportBNPM(329842, 493843, 'O-VF')">Organization Name O-VF</a> (164,002)</li>
+            <li><a href="#" onclick="localFuncs.ExportBNPM(493844, 666476, 'VF')">Organization Name VF</a> (172,633)</li>
+            <li><a href="#" onclick="localFuncs.ExportBNPM(666477, 700000, 'VT-Z')">Organization Name VT-Z</a> (195)</li>
+        </ul>
+    </div>
+</div>
+<p></p>
+
+<h3>Browse</h3>
+    @(Html.Kendo().Grid<hpcds.Models.SearchManufProductResultsViewModel>()
+        .Name("vmSearchManufProductResults")
+        .HtmlAttributes(new { style = "min-height:300px; height:80vh;", @class = "t-grid-with-filter-icon"})
+
+        .Columns( col => {
+            col.Bound(o => o.OrganizationId).Width(20).Hidden(true);
+            col.Bound(o => o.OrganizationName).Width(150).Encoded(false);
+            col.Bound(o => o.Brands).Width(300).Encoded(false);
+            col.Bound(o => o.cntOfBrands).Width(50).Hidden(true);
+        })
+
+        .ToolBar(t => t.Excel())
+        .Excel(xlsx => xlsx
+            .FileName("Results of Company Brands.xlsx")
+            .AllPages(true)
+            .Filterable(true)
+            .ForceProxy(true)
+            .ProxyURL(Url.Action("SaveExport"))
+        )
+        .Pageable(p => p.Numeric(false).PreviousNext(false))
+        .Scrollable(sc => sc.Endless(true))
+
+        .Filterable(m => m.Operators(op => op.ForString(str => str.Clear()
+        .Contains("Contains")
+        .DoesNotContain("Does Not Contain")
+        .StartsWith("Starts With")
+        .IsEqualTo("Is Equal To")
+        .IsNotEqualTo("Is Not Equal To")
+        .EndsWith("Ends With")
+        .IsNull("Is Null")
+        .IsNotNull("Is Not Null")
+        .IsEmpty("Is Empty")
+        .IsNotEmpty("Is Not Empty")
+        .IsNullOrEmpty("Has No Value")
+        .IsNotNullOrEmpty("Has Value")
+        )))
+        .Sortable()
+        .NoRecords(n => n.Template("No company to display"))
+
+        .DataSource(source =>
+        {
+            source
+            .Custom().Type("odata-v4")
+            .ServerFiltering(true)
+            .ServerSorting(true)
+            .ServerPaging(true).PageSize(75)
+
+            // Initial SortBy OrgName
+            .Sort(s => s.Add(a => a.OrganizationName).Ascending())
+
+            .Transport(transport => transport
+                .Read(read =>
+                {
+                    read.Url(hpcds.Code.Constants.SystemConstants.odataUrl + "/vInventoryByOrgs"); // TODO inital SortBy OrgName
+                })
+            );
+        })
+
+        .ClientDetailTemplateId("t-vmSearchProductResults")
+    )
+
+<script id="t-vmSearchProductResults" type="text/kendo-template">
+    @(Html.Kendo().Grid<hpcds.Models.SearchBNPMResultsViewModel>()
+        .Name("vmDetailsFor_#=OrganizationId#")
+        .HtmlAttributes(new { style = "min-height:300px; height:25vh;", @class = "t-grid-with-filter-icon"})
+
+        .Columns(col =>
+        {
+            col.Bound(o => o.OrganizationId).Width(20).Hidden(true);
+            col.Bound(o => o.OrganizationName).Width(80).Hidden(true).Encoded(false);
+            col.Bound(o => o.ChemicalNames).Width(100).Encoded(false);
+            col.Bound(o => o.BrandName).Width(50).Encoded(false);
+            col.Bound(o => o.ProductModel).Width(80).Encoded(false);
+        })
+
+        .ToolBar(t => t.Excel().HtmlAttributes(new { data_FKey = "#=OrganizationId#" }))
+        .Excel(xlsx => xlsx
+            .FileName("Results of Products for Company - #=OrganizationName# (#=OrganizationId#).xlsx")
+            .AllPages(true)
+            .Filterable(true)
+            .ForceProxy(true)
+            .ProxyURL(Url.Action("SaveExport"))
+        )
+        .Pageable(p => p.Numeric(false).PreviousNext(false))
+        .Scrollable(sc => sc.Endless(true))
+
+        .Filterable(m => m.Operators(op => op.ForString(str => str.Clear()
+            .Contains("Contains")
+            .DoesNotContain("Does Not Contain")
+            .StartsWith("Starts With")
+            .IsEqualTo("Is Equal To")
+            .IsNotEqualTo("Is Not Equal To")
+            .EndsWith("Ends With")
+            .IsNull("Is Null")
+            .IsNotNull("Is Not Null")
+            .IsEmpty("Is Empty")
+            .IsNotEmpty("Is Not Empty")
+            .IsNullOrEmpty("Has No Value")
+            .IsNotNullOrEmpty("Has Value")
+            )))
+        .Sortable()
+        .NoRecords(n => n.Template("No products to display"))
+
+        .DataSource(source =>
+        {
+            source
+            .Custom().Type("odata-v4")
+            .ServerFiltering(true)
+            .ServerSorting(true)
+            .ServerPaging(true).PageSize(25)
+
+            // Initial SortBy Brand
+            .Sort(s => s.Add(a => a.BrandName).Ascending())
+
+            .Transport(transport => transport
+                .Read(read =>
+                {
+                    read.Url(hpcds.Code.Constants.SystemConstants.odataUrl + "/vInventoryBnPmWithChems")
+                                                        .Data("function(options){localFuncs.ApplyParentOrgId(options,#=OrganizationId#);}");
+                })
+            );
+        })
+
+        .ToClientTemplate()
+
+    )
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/app/search")
+
+<script type="text/javascript">
+    var urls = {
+        odataUrl: '@(hpcds.Code.Constants.SystemConstants.odataUrl)',
+        odataUrl_vInvChems: '@(hpcds.Code.Constants.SystemConstants.odataUrl + "/vInventoryBnPmWithChems")',
+        saveExport: ' @Url.Action("SaveExport")',
+    };
+    var localFuncs = SearchJS(urls);
+</script>
+
+}

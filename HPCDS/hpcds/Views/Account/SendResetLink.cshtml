@@ -1,0 +1,59 @@
+﻿@model hpcds.Models.SendResetLinkViewModel
+@{
+    ViewBag.Title = "Reset User Password (temp)";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("SendResetLink", "Account", FormMethod.Post, new { @id = "ResetLink", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Users)
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    if (Model.IsSend)
+    {
+        <div class="alert alert-success alert-dismissible">
+            Mail sent successfully.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+    <div class="form-group">
+        @Html.Label("Select User:", new { @class = "col-md-12 control-label" })
+        <div class="col-md-12">
+            @(Html.Kendo().ComboBox()
+                                          .Name("UsersList")
+                                          .Placeholder("Select User")
+                                          .BindTo(Model.Users)
+                                        .SelectedIndex(0)
+                                        .Suggest(true)
+                                        .HtmlAttributes(new { style = "width:100%;" }))
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" id="reset" class="btn btn-primary" value="Submit" />
+        </div>
+    </div>
+
+    @section DebugMode {
+        @if (this.Context.IsDebuggingEnabled && !string.IsNullOrEmpty(ViewBag.DebugMessage))
+        {
+            @Html.Raw(@ViewBag.DebugMessage)
+        }
+    }
+}
+<script>
+    $(document).ready(function () {
+        $("#reset").click(function () {
+            $('#ResetLink').append('<input type="hidden" name="SelectedUserId" value="' + $("#UsersList").data("kendoComboBox").value() + '" />');
+        });
+    });
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

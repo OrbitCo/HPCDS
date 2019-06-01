@@ -1,0 +1,25 @@
+﻿@model int?
+@{ 
+    var htmlAttr = ViewData["htmlAttributes"] ?? new { @class = "form-control", data_val_number = "Must select from the list" };
+}
+
+@(Html.Kendo().ComboBoxFor(m => m)
+            .DataTextField("OrganizationName")
+            .DataValueField("ID")
+            .Placeholder("Search by name or oid...")
+            .HtmlAttributes(htmlAttr)
+            .Filter(FilterType.Contains)
+            .Events(e => e.Filtering("common.func.filtering.byActiveOrLegacyOrgs"))
+            .DataSource(source =>
+            {
+                source
+                .Custom().Type("odata-v4")
+                .ServerFiltering(true)
+                .ServerPaging(true).PageSize(100)
+                .Transport(transport => transport
+                    .Read(read => { read.Url( hpcds.Code.Constants.SystemConstants.odataUrl + "/vOrganizations"); })
+                );
+            })
+            .HeaderTemplate("<div class='dd-k-header'><div class='col-8'>Organization (OID)</div> <div class='col-4'>Legacy PIN</div></div>")
+            .Template("<div class='col-8'>#: data.OrganizationName # (#: data.PIN || 'tbd' #)</div> <div class='col-4'>#: data.LegacyWaPins || 'none' #</div>")
+)

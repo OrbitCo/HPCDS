@@ -1,0 +1,154 @@
+﻿@model hpcds.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-vertical", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    @(Html.Kendo().PanelBar()
+                .Name("pb-registration")
+                .ExpandMode(PanelBarExpandMode.Multiple)
+                .SelectedIndex(0)
+                .Items(items =>
+                {
+                    items.Add().Text("1. User Info")
+                        .Content(@<text><br />
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.FirstName, new { @class = "col-sm-2 col-md-3 control-label" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(m => m.FirstName)
+                                    @Html.ValidationMessageFor(m => m.FirstName)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.LastName, new { @class = "col-sm-2 col-md-3 control-label" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(m => m.LastName)
+                                    @Html.ValidationMessageFor(model => model.LastName)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.JobTitle, new { @class = "col-sm-2 col-md-3 control-label" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(m => m.JobTitle)
+                                    @Html.ValidationMessageFor(m => m.JobTitle)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-sm-2 col-md-3 control-label" })
+                                @Html.EditorFor(m => m.PhoneInternationalFlag)
+                                <div class="col-md-10">
+                                    @Html.EditorFor(m => m.PhoneNumber)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Email, new { @class = "col-sm-2 col-md-3 control-label" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(m => m.Email)
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-2 col-md-3">
+                                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                                    <a class="k-icon k-i-information text-info" tabindex="0" style="text-decoration: none" data-toggle="popover" data-trigger="focus" title="Hint" data-content="@HPCDS.Resources.Model.ApplicationUserRes.PasswordTooltip"></a>
+                                </div>
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-sm-2 col-md-3 control-label" })
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                                </div>
+                            </div>
+                            <br />
+                        </text>);
+
+                    items.Add().Text("2. Security Questions")
+                        .Content(@<text><br />
+                            <p class="col-10 form-group">Please provide answers for three question.</p>
+                            @for (int i = 0; Model.Qs != null && i < Model.Qs.Count(); i++)
+                            {
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Qs[i].Q_ID
+                                            , string.Format("{0} {1}:",Html.DisplayNameFor(m => m.Qs[i].Q_ID),i+1)
+                                            , new { @class = "col-sm-6 col-md-4 control-label hidden sr-only" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(m => m.Qs[i].Q_ID, null, new { page = i })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Qs[i].Answer, new { @class = "col-sm-2 col-md-3 control-label hidden sr-only" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(m => m.Qs[i].Answer)
+                                        <br /><br />
+                                    </div>
+                                </div>
+                            }
+                            <br />
+                        </text>);
+
+                    items.Add().Text("3. Organization Info")
+                        .Content(@<text><br />
+                            <fieldset class="">
+                                <legend class="col-12 h6">Is your Organization already registered?</legend>                                
+                                <div class="form-group">
+
+                                    <label class="col-12">@Html.RadioButtonFor(m => m.IsHpcdsOrganization, true, new { data_toggle = "collapse", data_target = ".isHpcdsOrganization-panel:not(.show), .notHpcdsOrganization-panel.show" }) Yes, @Html.DisplayNameFor(m => m.O_ID)</label>
+                                    <div class="isHpcdsOrganization-panel collapse show col-12 col-md-10">
+                                        @Html.EditorFor(m => m.O_ID, new { htmlAttributes = new { @class = "form-control", data_val_number = "Must select from the list" } })
+                                        @Html.ValidationMessageFor(model => model.O_ID, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <hr class="col-10" />
+
+                                    <label class="col-12">@Html.RadioButtonFor(m => m.IsHpcdsOrganization, false, new { data_toggle = "collapse", data_target = ".isHpcdsOrganization-panel.show, .notHpcdsOrganization-panel:not(.show)" }) No, @Html.DisplayNameFor(m => m.NewOrganization)</label>
+                                    <div class="notHpcdsOrganization-panel collapse">
+                                        @Html.EditorFor(model => model.NewOrganization)
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <br />
+                        </text>);
+                })
+    )
+    
+    <br />
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary btn-lg col-12" value="Register" />
+    </div>
+    <br />
+
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/app/account")
+    
+    <script type="text/javascript">
+        var localFuncs = RegisterJS();
+
+        $(function () {
+
+            // Tigger Change Event, so -panel collapse or show based on selected value
+            localFuncs.ShowHidePanels();
+
+            //Kendo validation on submit
+            localFuncs.ClientSideFormValidation();
+        });
+       
+    </script>
+}

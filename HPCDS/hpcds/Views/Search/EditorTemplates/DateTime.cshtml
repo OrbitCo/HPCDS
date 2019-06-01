@@ -1,0 +1,6 @@
+@model DateTime?
+@{
+    string evnt = ViewBag.evnt;
+    string name = ViewBag.name;
+}
+@(Html.Kendo().DatePickerFor(m => m).Events(m => { m.Change(evnt); }).Name(name).Start(CalendarView.Decade))

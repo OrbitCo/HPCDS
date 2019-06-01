@@ -1,0 +1,20 @@
+﻿@model int?
+@(Html.Kendo().ComboBoxFor(m => m)
+    .DataTextField("ChemicalFunctionName")
+    .DataValueField("ChemicalFunctionId")
+    .Placeholder("Search by name")
+    .HtmlAttributes(new { @class = "form-control" })
+    .MinLength(2)
+    .Filter("contains")
+    .EnforceMinLength(true)
+    .Suggest(true)
+    .DataSource(source =>
+    {
+        source
+        .Custom().Type("odata-v4")
+        .ServerFiltering(true)
+        .Transport(transport => transport
+            .Read(read => { read.Url(hpcds.Code.Constants.SystemConstants.odataUrl + "/ChemicalFunctions"); })
+        );
+    })
+)

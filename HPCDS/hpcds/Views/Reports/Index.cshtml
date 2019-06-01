@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Reports";
+}
+<h2>@ViewBag.Title</h2>
+
+<a href="#Inventory">Create New Report from Inventory</a>
+<br />
+<a href="#SubmittedReports">View & Copy Submitted Reports</a> @* TODO: HPCDS-60, have link open the Submitted tab *@
+<br />
+<a href="#DraftReports">View & Edit Draft Reports</a> @* TODO: HPCDS-60, have the anchor open the Draft tab *@
+
+<br />
+<br />
+
+<h3 id="Inventory">Inventory</h3>
+<div class="d-inline-block">
+    <div class="form-group border col-12">
+        <label>If you would like to upload data, please use the appropriate template.</label>
+        <br />
+        @Html.ActionLink("Function Set Template", "FucntionSetTemplate") (XLSX)
+        <br />
+        @Html.ActionLink("Brand Name Product Model (BNPM) Template", "BNPMTemplate") (XLSX) - Vermont only
+    </div>
+</div>
+<div class="d-inline-block float-right">
+    @Html.ActionLink("Create New Report with Selected Records", "NewReport", null, new { @class = "btn btn-primary col-12 col-sm-8 float-right" })
+</div>
+
+<div class="clearfix"></div>
+
+<br />
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="function-tab" data-toggle="tab" href="#Functions" role="tab" aria-controls="home" aria-selected="true">Function Set</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="BNPM-tab" data-toggle="tab" href="#BNPM" role="tab" aria-controls="profile" aria-selected="false">VT Brand Name Product Model</a>
+    </li>
+
+</ul>
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="Functions" role="tabpanel" aria-labelledby="function-tab">
+        @{Html.RenderPartial("~/Views/Reports/Partials/_Inv01_FunctionSet.cshtml");}
+    </div>
+    <div class="tab-pane fade" id="BNPM" role="tabpanel" aria-labelledby="BNPM-tab">
+        @{Html.RenderPartial("~/Views/Reports/Partials/_Inv02_BNPM.cshtml");}
+    </div>
+</div>
+
+<br />
+
+<h3 id="SubmittedReports">Reports</h3>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="published-tab" data-toggle="tab" href="#published" role="tab" aria-controls="published" aria-selected="true">Published</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="Submitted-tab" data-toggle="tab" href="#Submitted" role="tab" aria-controls="Submitted" aria-selected="false">Submitted</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="drafts-tab" data-toggle="tab" href="#drafts" role="tab" aria-controls="drafts" aria-selected="false">Drafts</a>
+        <a id="DraftReports"></a> @* TODO: HPCDS-60, have links to anchor also open the tab*@
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="published" role="tabpanel" aria-labelledby="published-tab">
+        @{Html.RenderPartial("~/Views/Reports/Partials/_Rpt01_Published.cshtml");}
+    </div>
+    <div class="tab-pane fade" id="Submitted" role="tabpanel" aria-labelledby="Submitted-tab">
+        @{Html.RenderPartial("~/Views/Reports/Partials/_Rpt02_Submitted.cshtml");}
+    </div>
+    <div class="tab-pane fade" id="drafts" role="tabpanel" aria-labelledby="drafts-tab">
+        @{Html.RenderPartial("~/Views/Reports/Partials/_Rpt03_Drafts.cshtml");}
+    </div>
+</div>
+

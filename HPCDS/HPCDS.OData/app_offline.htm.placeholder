@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-green">
+<head>
+    <title>HPCDS Offline</title>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="favicon.ico"> -->
+    <link rel="shortcut icon" href="#">
+    <link rel="stylesheet prefetch" href="https://www.atsdr.cdc.gov/TemplatePackage/4.0/assets/vendor/css/bootstrap.css?2018-12-20T22:57:53Z">
+    <link rel="stylesheet prefetch" href="https://www.atsdr.cdc.gov/TemplatePackage/4.0/assets/css/app.min.css?2018-12-20T22:57:53Z">
+
+    <title>Search</title>
+    <link href="./style/bootstrap.min.css" rel="stylesheet">
+    <link href="./style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+
+<body class="js" style="">
+    <style>
+        p.msg:before {
+            content: 'Offline while we update from release 0.1, comming soon.';
+        }
+    </style>
+    <!-- Begin included content (from /TemplatePackage/4.0/includes/global-alert.html) -->
+    <div class="row">
+        <div class="alert alert-info col-md-12 rounded-0" id="alert_unique_hpcds123" data-alert-start="January 18, 2019 10:23 am" data-alert-end="January 18, 2019 03:00 pm" role="alert">
+            <div class="padding-pagealert">
+                <p class="text-center msg"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- End included content (from /TemplatePackage/4.0/includes/global-alert.html) -->
+
+    <div class="container-fluid header-wrapper">
+        <div class="container">
+            <header role="banner" aria-label="Header" class="pt-2 pb-2">
+                <div class="">
+                  
+                    <a href="https://www.erg.gov/" tabindex="-1">
+                    </a>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <div class="container-fluid site-title">
+        <div class="container">
+            <div class="row">
+                <div class="">
+                    <div class="display-6 text-white fw-500 pt-1 pb-1">
+                        <a href="/HPCDS/">High Priority Chemicals Data System (HPCDS)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Page Content Wrap -->
+    <div class="container d-flex flex-wrap body-wrapper">
+        <!-- Content -->
+        <main class="col-lg-9 order-lg-2" role="main" aria-label="Main Content Area">
+            <div class="row">
+                <div class="col content">
+                    <h1 id="content">Application Offline</h1>
+                    <div class="syndicate">
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <p class="msg"></p>
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            </br>
+            <div class="row">
+                <div class="col-sm-7">
+                    <p class="footer-title footer-leftright-spacing">ABOUT US</p>
+                    <p class="footer-paragraph footer-leftright-spacing">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque bibendum eget ligula at lacinia.
+                        Nam sodales, quam non placerat blandit, elit ipsum rutrum est, vel dapibus ligula risus a quam.
+                        Phasellus finibus, augue in laoreet consectetur, arcu ipsum viverra quam, vel ornare est est i
+                        d mauris. Sed lacinia lacus vitae tortor viverra, et interdum massa ullamcorper.
+                    </p>
+                </div>
+                <div class="col-sm-5" style="text-align:right">
+                    <ul class="UlWithoutBullet" style="list-style-type: none;">
+                        <li class="footer-title footer-leftright-spacing">CONTACT US</li>
+                        <li class="footer-text footer-contact-text footer-leftright-spacing">89 South Street, Suite 600</li>
+                        <li class="footer-text footer-contact-text footer-leftright-spacing">Boston, MA 02111-2651</li>
+                        <li class="footer-text footer-contact-text footer-leftright-spacing">(617) 367-8558</li>
+                        <li class="footer-text footer-contact-text footer-leftright-spacing">Email: <a href="mailto:support@theic2.org">support@theic2.org</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

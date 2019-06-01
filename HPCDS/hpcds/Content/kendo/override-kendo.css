@@ -1,0 +1,79 @@
+/* Menu */
+ul.k-widget.k-reset.k-header.k-menu.k-menu-horizontal {
+    background-color: #5c5180; /* TheIC2 Master Purple Color */
+}
+
+:not(.k-column-menu) >  .k-menu:not(.k-context-menu) > .k-item {
+    color: white;
+}
+    :not(.k-column-menu) > .k-menu:not(.k-context-menu) > .k-item > .k-state-active {
+        color: gold
+    }
+
+.dropdown-item:focus, .dropdown-item:hover {
+    color: #ffffff; /* use - kendo SELECTED variable */
+    background-color: #01A8C1;
+}
+
+    .dropdown-item:focus.disabled, .dropdown-item:hover.disabled {
+        color: #006989;  /* use - kendo HOVER variables */
+        background-color: #d6e8eb;
+    }
+
+
+/* Panel Label/Header */
+.k-panelbar > .k-item > .k-link.k-header {
+    font-weight: bold; /* 500 */
+}
+
+/* Kendo Grid when OnNoRecords */
+.k-grid-norecords {
+    text-align: center;
+    padding-top: 2em;
+}
+
+/* Combobox Custom Header (created) */
+.dd-k-header {
+    background-color: #5c5180; /* should match menu bg */
+    color: white;
+    font-weight: bold;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+    .dd-k-header > * {
+        display: inline-block; 
+        margin-left: -10px;
+    }
+
+/* Validation, introduced HPCDS-103 for Registration, MyProfile, MyOrganization Edit forms with client-side validation which use k-tooltips 
+    src: from noric.all theme
+*/
+.k-tooltip-validation, .field-validation-error {
+    background-color: #e14d6b; /* (ln 14105), used .k-notification-error*/
+    color: #fff; /* (ln 7649), used .k.tooltip */
+    display: flex; /* (ln 7545), used .k.tooltip */
+    flex-direction: row; /* Override so content of tooltip is inline */
+    margin-top: 0;
+    padding: .25em .5em;
+    /* HPCDS-103, Option 1 - Warning background, darkred text */
+    /* background-color: #ffc857;*/ /* (ln 14099), used .k-notification-warning */
+    /* color: darkred;           */ /* darkred instead of black, which is has 6.51 contrast ratio passes AA */
+    /* HPCDS-103, Option 2 - OR at the theme level .k-notification-warning and use that for background #76011a (a marron-red) */
+    /* background-color: #76011a;*/ /* (ln 14105), used .k-notification-error */
+}
+
+/* HPCDS-120 : To increase height of multi-select combobox */
+.ms-wrapper .k-multiselect-wrap {
+    overflow: auto;
+    height: 80px;
+}
+
+/* HPCDS-158 : filter icon override */ 
+.t-grid-with-filter-icon .k-i-more-vertical::before, .t-grid-with-filter-icon .k-i-vbars::before {
+    content: "\e129";
+}
+
+.t-grid-with-filter-icon .k-state-active {
+    color: #fff;
+    background-color: #01A8C1;
+}

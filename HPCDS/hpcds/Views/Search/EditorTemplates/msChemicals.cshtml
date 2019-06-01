@@ -1,0 +1,22 @@
+﻿@model string
+@(Html.Kendo().MultiSelectFor(m => m)
+            .Name("Chemicals") // TODO: (HPCDS-124) remove need to specify/hardcode the Nam
+            .DataTextField("ChemicalName")
+            .DataValueField("ChemicalId")
+            .Placeholder("Search by name or CASRN...")
+            .HtmlAttributes(new { @class = "ms-wrapper" })
+            .Filter(FilterType.Contains)
+            .Events(e => e.Filtering("common.func.filtering.byChemicalNameAndCASRN")
+            )
+            .DataSource(source =>
+            {
+                source
+                .Custom().Type("odata-v4")
+                .ServerFiltering(true)
+                .Transport(transport => transport
+                    .Read(read => { read.Url(hpcds.Code.Constants.SystemConstants.odataUrl + "/Chemicals"); })
+                );
+            })
+            .ItemTemplate("<div class='col-12'>#: data.ChemicalName # (#: data.CASNumber || 'tbd' #)</div>")
+            .TagTemplate("<span>#: data.ChemicalName # [#: data.CASNumber || 'tbd' #]</span>")
+)

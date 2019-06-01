@@ -1,0 +1,13 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Locked Out";
+}
+
+<hgroup>
+    <h1 class="text-danger">Lockout</h1>
+    <p class="text-danger">You have been locked out of the application due to entering too many invalid log in credentials. 
+        You may try again in @(ViewBag.DefaultAccountLockoutTimeSpan ?? "??") minutes or 
+        @Html.ActionLink("retrieve your forgotten password.", "ForgotPassword","Account")
+    </p>
+</hgroup>

@@ -1,0 +1,66 @@
+﻿@using hpcds.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+@section ContainerClass {@("col-lg-4 col-md-6 col-sm-8 col-12")}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-12">
+        <section id="loginForm">
+
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+
+                    @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    <div class="input-group input-group-lg">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    <div class="input-group input-group-lg">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @type = "password" })
+                        <div class="input-group-append">
+                            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Log in" class="col-12 btn btn-primary btn-lg" />
+                </div>
+
+                <div class="row login-links">
+                    <div class="col-sm-4">@Html.ActionLink("Register", "Register")</div>
+                    <div class="clearfix visible-xs-block"></div>
+                    <div class="col-sm-8 text-sm-right">@Html.ActionLink("Forgot your password?", "ForgotPassword")</div>
+                </div>
+            }
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

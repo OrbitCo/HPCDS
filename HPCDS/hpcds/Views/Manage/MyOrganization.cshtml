@@ -1,0 +1,39 @@
+﻿@model hpcds.Models.Organization
+@{
+    ViewBag.Title = "My Organization";
+
+    // TODO: (HPCDS-103) add a ValidationMessageFor for all inputs on this page
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("MyOrganization", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.EditorFor(model => model)
+        @Html.HiddenFor(model => model.ID)
+    </div>
+    <br />
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary btn-lg col-12" value="Edit" />
+    </div>
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/app/account")
+    <script type="text/javascript">
+        var localFuncs = RegisterJS();
+
+        $(function () {
+
+            // Tigger Change Event, so -panel collapse or show based on selected value
+            localFuncs.ShowHidePanels();
+
+            //Kendo validation on submit
+            localFuncs.ClientSideFormValidation();
+        });
+    </script>
+}

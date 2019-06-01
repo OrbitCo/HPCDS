@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink((Session["CurrentUsersName"]?.ToString() ?? "Error" ) + " - " + Session["CurrentUsersOrg"]?.ToString(), "Index", "Manage", routeValues: new { area = "" }, htmlAttributes: new { title = "Manage", @class = "nav-link navbar-link" })
+        </li>
+        @*<li>
+            @Html.ActionLink(Session["CurrentUsersOrg"]?.ToString()?? "ORG", "MyOrganization", "Manage", routeValues: new { area = "" }, htmlAttributes: new { title = "Manage", @class = "nav-link navbar-link" })
+        </li>*@
+        <li><a class="nav-link navbar-link" href="javascript:sessionStorage.removeItem('accessToken');$('#logoutForm').submit();">Log out</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: new { area = "" }, htmlAttributes: new { id = "registerLink", @class = "nav-link navbar-link" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: new { area = "" }, htmlAttributes: new { id = "loginLink", @class = "nav-link navbar-link" })</li>
+    </ul>
+}

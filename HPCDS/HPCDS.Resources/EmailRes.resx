@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EmailValidationBodyFormat" xml:space="preserve">
+    <value>&lt;p&gt;This is an automatically generated email from the High Priority Chemicals Data System (HPCDS).&lt;/p&gt;
+&lt;p&gt;Please confirm your HPCDS account by clicking the following link: &lt;a href='{0}'&gt;{0}&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If clicking this link does not work, try copying and pasting the URL into the address bar of your web browser.&lt;/p&gt;
+&lt;p&gt;If you need help, please contact the HPCDS application administrator, Topher Buck, at 617-367-8558 x309 or tbuck@newmoa.org&lt;/p&gt;
+&lt;p&gt;Please do not respond to this email.&lt;/p&gt;</value>
+    <comment>Email body</comment>
+  </data>
+  <data name="EmailValidationSubjectFormat" xml:space="preserve">
+    <value>Confirm your HPCDS account</value>
+    <comment>Email Subject</comment>
+  </data>
+  <data name="RegistrationApprovalReqForAdminBodyFormat" xml:space="preserve">
+    <value>&lt;p&gt;This is an automatically generated email from the High Priority Chemicals Data System (HPCDS).&lt;/p&gt;
+&lt;p&gt;A new user has created an HPCDS account for an organization with no other users: {0} for {1}. &lt;/p&gt;
+&lt;p&gt;To approve this user, please click on the &lt;a href="{2}?email={0}&amp;code={3}"&gt;Approve New User Link&lt;/a&gt;. Once approved, the new user will receive an email with login instructions and no further action is required on your part.&lt;/p&gt;
+&lt;p&gt;If the Approve New User Link above does not work, try copying and pasting the following URL into the address bar of your web browser: {2}?email={0}&amp;code={3}&lt;/p&gt;
+&lt;p&gt;If you need help, please contact the HPCDS application administrator, Topher Buck, at 617-367-8558 x309 or tbuck@newmoa.org&lt;/p&gt;
+&lt;p&gt;Please do not respond to this email.&lt;/p&gt;</value>
+    <comment>Registration: Approval Requested for New User and New Org (Email Body) - HPCDS-22</comment>
+  </data>
+  <data name="RegistrationApprovalReqForAdminSubjectFormat" xml:space="preserve">
+    <value>HPCDS new user account for new organization</value>
+    <comment>Registration: Approval Requested for New User and New Org (Email Subject) - HPCDS-22</comment>
+  </data>
+  <data name="RegistrationApprovalReqForOrgUsersBodyFormat" xml:space="preserve">
+    <value>&lt;p&gt;This is an automatically generated email from the High Priority Chemicals Data System (HPCDS).&lt;/p&gt;
+&lt;p&gt;A new user has created an HPCDS account and requested to join your organization: {0}. &lt;/p&gt;
+&lt;p&gt;To approve this user, please click on the &lt;a href="{2}?email={0}&amp;code={3}"&gt;Approve New User Link&lt;/a&gt;. Once approved, the new user will receive an email with login instructions and no further action is required on your part.&lt;/p&gt;
+&lt;p&gt;If you believe you received this message in error, simply delete this email. &lt;/p&gt;
+&lt;p&gt;If the Approve New User Link above does not work, try copying and pasting the following URL into the address bar of your web browser: {2}?email={0}&amp;code={3}&lt;/p&gt;
+&lt;p&gt;If you need help, contact the HPCDS application administrator, Topher Buck, at 617-367-8558 x309 or tbuck@newmoa.org.&lt;/p&gt;
+&lt;p&gt;Please do not respond to this email.&lt;/p&gt;</value>
+    <comment>Registration: Approval Requested for New User to Active Org (Email Body) - HPCDS-22</comment>
+  </data>
+  <data name="RegistrationApprovalReqForOrgUsersSubjectFormat" xml:space="preserve">
+    <value>HPCDS new user account for your organization</value>
+    <comment>Registration: Approval Requested for New User to Active Org (Email Subject) - HPCDS-22</comment>
+  </data>
+  <data name="ResetPWD_NotRegisterdUserBodyFormat" xml:space="preserve">
+    <value>&lt;p&gt;This is an automatically generated e-mail from the High Priority Chemicals Data System (HPCDS).&lt;/p&gt;
+&lt;br/&gt;You have requested an HPCDS account password reset; however, the HPCDS does not contain an account associated with this email address. You may create an account at &lt;a href='{0}'&gt;https:\\hpcds.theic2.org&lt;/a&gt;.&lt;br/&gt;&lt;br/&gt;
+&lt;/p&gt;If you need help, please contact the HPCDS application administrator, Topher Buck, at 617-367-8558 x309 or tbuck@newmoa.org&lt;br/&gt;&lt;br/&gt;
+&lt;p&gt;Please do not respond to this email.&lt;/p&gt;</value>
+    <comment>Email body</comment>
+  </data>
+  <data name="ResetPWD_NotRegisterdUserSubjectFormat" xml:space="preserve">
+    <value>HPCDS account reset information</value>
+    <comment>Email Subject</comment>
+  </data>
+  <data name="ResetPWD_NotVerifiedUserBodyFormat" xml:space="preserve">
+    <value>&lt;p&gt;This is an automatically generated email from the High Priority Chemicals Data System (HPCDS).&lt;/p&gt;
+&lt;p&gt;Our records show that you have not validated your email address. Please validate your email address by clicking on the following link: &lt;a href='{0}'&gt;{0}&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If clicking the link above does not work, try copying and pasting the URL into the address bar of your web browser.&lt;/p&gt; 
+&lt;p&gt;After validating your email address, return to the Login Page: &lt;a href='{1}'&gt;{1}&lt;/a&gt; and click on &lt;a href='{2}'&gt;Forgot your password?&lt;/a&gt; to reset your password.&lt;/p&gt;
+&lt;p&gt;If you need help, please contact the HPCDS application administrator, Topher Buck, at 617-367-8558 x309 or tbuck@newmoa.org&lt;/p&gt;
+&lt;p&gt;Please do not respond to this email.&lt;/p&gt;</value>
+    <comment>Email body</comment>
+  </data>
+  <data name="ResetPWD_NotVerifiedUserSubjectFormat" xml:space="preserve">
+    <value>HPCDS account reset information</value>
+    <comment>Email Subject</comment>
+  </data>
+  <data name="ResetPWD_RegisterdUserBodyFormat" xml:space="preserve">
+    <value>&lt;p&gt;This is an automatically generated email from the High Priority Chemicals Data System (HPCDS).&lt;/p&gt;
+&lt;p&gt;You have requested a password reset for your HPCDS account. Please click the following link and follow the instructions provided to reset your password: &lt;a href='{0}'&gt;{0}&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If clicking this link does not work, try copying and pasting the URL into the address bar of your web browser.&lt;/p&gt;
+&lt;p&gt;If you need help, please contact the HPCDS application administrator, Topher Buck, at 617-367-8558 x309 or tbuck@newmoa.org&lt;/p&gt;
+&lt;p&gt;Please do not respond to this email.&lt;/p&gt;</value>
+    <comment>Email body</comment>
+  </data>
+  <data name="ResetPWD_RegisterdUserSubjectFormat" xml:space="preserve">
+    <value>HPCDS account reset information</value>
+    <comment>Email Subject</comment>
+  </data>
+</root>

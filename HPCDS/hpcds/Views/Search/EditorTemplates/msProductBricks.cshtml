@@ -1,0 +1,21 @@
+﻿@model string
+@(Html.Kendo().MultiSelectFor(m=>m)
+              .Name("ProductBricks") // TODO: (HPCDS-124) remove need to specify/hardcode the Name
+              .DataTextField("ProductBrickDescription")
+              .DataValueField("ProductBrickId")
+              .HtmlAttributes(new { @class = "ms-wrapper" })
+              .Placeholder("Select brick(s)")
+              .Events(e => e.Filtering("common.func.filtering.byCodeOrDescriptionForBricks"))
+              .DataSource(source =>
+              {
+                  source
+                  .Custom().Type("odata-v4")
+                  .ServerFiltering(true)
+                  .Transport(transport => transport
+                      .Read(read => { read.Url(hpcds.Code.Constants.SystemConstants.odataUrl + "/ProductBricks"); })
+                  );
+              })
+              .HeaderTemplate("<div class='dd-k-header'><div class='col-2'>Code</div> <div class='col-8'>Description</div></div>")
+              .ItemTemplate("<div class='col-2'>#: data.ProductBrickCode #</div> <div class='col-10'>#: data.ProductBrickDescription || 'none' #</div>")
+              .TagTemplate("<span>#: data.ProductBrickDescription # [#: data.ProductBrickCode || 'tbd' #]</span>")
+)

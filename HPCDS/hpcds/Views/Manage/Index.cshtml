@@ -1,0 +1,145 @@
+﻿@model hpcds.Models.UserProfileViewModel
+@using hpcds.Code.Constants
+@{
+    ViewBag.Title = "Manage";
+}
+<h2>@ViewBag.Title</h2>
+<br />
+@if (ViewBag.StatusMessage != "")
+{
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        @ViewBag.StatusMessage
+    </div>
+}
+<h5>My Profile</h5>
+<hr />
+<div class="form-group">
+    @if (!User.IsInRole(UserRoles.PendingAccess))
+    {
+        <div class="col-12">
+            @Html.ActionLink("Change your profile", "MyProfile", "Manage")
+            <br /><br />
+        </div>
+    }
+
+    @Html.LabelFor(m => m.Email, new { @class = "col-5 col-md-3 control-label" })
+    @Html.DisplayTextFor(m => m.Email)
+    <br />
+    @Html.LabelFor(m => m.Organization.OrganizationName, new { @class = "col-5 col-md-3 control-label" })
+    <a href="#OrganizationInfo">@Html.DisplayFor(m => m.Organization.OrganizationName)</a>
+    @if (!User.IsInRole(UserRoles.PendingAccess))
+    {
+        <text>&nbsp;</text>
+        <a href="@Url.Action("MyOrganization", "Manage")"><span class="k-icon k-i-pencil"><span class="sr-only">Edit Organization</span></span></a>
+    }
+    <br />
+    @Html.Label("Name", new { @class = "col-5 col-md-3 control-label" })
+    @Html.DisplayFor(m => m.FirstName) @Html.DisplayFor(m => m.LastName)
+    <br />
+    @Html.LabelFor(m => m.JobTitle, new { @class = "col-5 col-md-3 control-label" })
+    @Html.DisplayTextFor(m => m.JobTitle)
+    <br />
+    @if (!string.IsNullOrEmpty(Model.PhoneNumber))
+    {
+        @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-5 col-md-3 control-label" })
+        if (Model.PhoneInternationalFlag)
+        {
+            @Html.Label("[Non-US]")
+        }
+        else
+        {
+            @Html.Label("[US]")
+        }
+        <text>&nbsp;</text>
+        @Html.DisplayFor(m => m.PhoneNumber, new { @class = "input-medium bfh-phone" })
+    }
+</div>
+<h5>Password</h5>
+<hr />
+<div class="form-group">
+    <div class="col-12">
+        @if (Model.HasPassword)
+        {
+            @Html.ActionLink("Change your password", "ChangePassword")
+        }
+        else
+        {
+            @Html.ActionLink("Create", "SetPassword")
+        }
+    </div>
+    <br />
+</div>
+<h5>Security Questions</h5>
+<hr />
+@for (int i = 0; Model.Qs != null && i < Model.Qs.Count(); i++)
+{
+    var q = i + 1;
+    <div class="form-group">
+        <div class="col-md-12">
+            @q. @Html.DisplayFor(m => m.Qs[i].Question)
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Qs[i].Answer, new { @class = "col-sm-2 col-md-3 control-label hidden sr-only" })
+        <div class="col-md-12">
+            Answer: @Html.DisplayFor(m => m.Qs[i].Answer)
+        </div>
+    </div>
+}
+<br />
+
+<h5 id="OrganizationInfo">
+    My Organization
+    @if (!User.IsInRole(UserRoles.PendingAccess))
+    {
+        <text>&nbsp;</text>
+        <a href="@Url.Action("MyOrganization", "Manage")"><span class="k-icon k-i-pencil"><span class="sr-only">Edit Organization</span></span></a>
+    }
+</h5>
+<hr />
+<div class="row">
+    @Html.LabelFor(m => m.Organization.ContactUser, new { @class = "col-5 col-md-3 control-label" })
+    <div class="col-7 col-md-9">
+        @Html.DisplayFor(m => m.Organization.ContactUser)
+    </div>
+</div>
+<div class="row">
+    @Html.LabelFor(m => m.Organization.DUNSNumber, new { @class = "col-5 col-md-3 control-label" })
+    <div class="col-7 col-md-9">
+        @Html.DisplayFor(m => m.Organization.DUNSNumber)
+        <br/>
+    </div>
+</div>
+<div class="form-group">
+    @for (int i = 0; i < Model.Organization.Addresses.Count(); i++)
+    {
+        <h6>
+            @Model.Organization.Addresses.ToList()[i].AddressType Address
+        </h6>
+        @Html.LabelFor(m => m.Organization.Addresses.ToList()[i].AddressLine1, new { @class = "col-5 col-md-3 control-label" })
+        @Html.DisplayTextFor(m => m.Organization.Addresses.ToList()[i].AddressLine1)
+        <br />
+        @Html.LabelFor(m => m.Organization.Addresses.ToList()[i].AddressLine2, new { @class = "col-5 col-md-3 control-label" })
+        @Html.DisplayTextFor(m => m.Organization.Addresses.ToList()[i].AddressLine2)
+        <br />
+        @Html.LabelFor(m => m.Organization.Addresses.ToList()[i].City, new { @class = "col-5 col-md-3 control-label" })
+        @Html.DisplayTextFor(m => m.Organization.Addresses.ToList()[i].City)
+        <br />
+        @Html.LabelFor(m => m.Organization.Addresses.ToList()[i].CountryCd, new { @class = "col-5 col-md-3 control-label" })
+        @Html.DisplayTextFor(m => m.Organization.Addresses.ToList()[i].CountryCd)
+        <br />
+        @Html.LabelFor(m => m.Organization.Addresses.ToList()[i].StateProv, new { @class = "col-5 col-md-3 control-label" })
+        @Html.DisplayTextFor(m => m.Organization.Addresses.ToList()[i].StateProv)
+        <br />
+        @Html.LabelFor(m => m.Organization.Addresses.ToList()[i].PostalCodeNumber, new { @class = "col-5 col-md-3 control-label" })
+        @Html.DisplayTextFor(m => m.Organization.Addresses.ToList()[i].PostalCodeNumber)
+        <hr />
+    }
+</div>
+
+<script>
+    $(function () {
+        $("form").kendoValidator();
+    });
+</script>

@@ -1,0 +1,26 @@
+﻿@section SPAViews {
+    @if (User.IsInRole(hpcds.Code.Constants.UserRoles.PendingAccess))
+    {
+        @Html.Partial("_Pending")
+    }
+    else
+    {
+        @Html.Partial("_Home")
+    }
+}
+
+@section DebugMode {
+    @if (this.Context.IsDebuggingEnabled && !string.IsNullOrEmpty(ViewBag.DebugMessage))
+    {
+        @Html.Raw(@ViewBag.DebugMessage)
+    }
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/knockout")
+    @if (!User.IsInRole(hpcds.Code.Constants.UserRoles.PendingAccess))
+    {
+        @Scripts.Render("~/bundles/app")
+    }
+}
+

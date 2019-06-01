@@ -1,0 +1,49 @@
+﻿@model hpcds.Models.OrganizationAddress
+<div class="form-group">
+    @Html.LabelFor(model => model.CountryCd, htmlAttributes: new { @class = "control-label col-md-6" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.CountryCd)      
+        @Html.ValidationMessageFor(model => model.CountryCd)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.AddressLine1, htmlAttributes: new { @class = "control-label col-md-6" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.AddressLine1, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AddressLine1, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.AddressLine2, htmlAttributes: new { @class = "control-label col-md-6" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.AddressLine2, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AddressLine2, "", new { @class = "text-danger" })
+    </div>
+</div>
+<div class="form-row col-12">
+    <div class="col-12 col-sm-5 col-md-6">
+        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label" })
+        <div>
+            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-6 col-sm-4 col-md-3">
+        @Html.LabelFor(model => model.StateProv, htmlAttributes: new { @class = "control-label" })
+        <div>
+                @Html.EditorFor(model => model.StateProv, null, new { type = Model.AddressType.ToString()})
+                @Html.ValidationMessageFor(model => model.StateProv)
+            </div>
+        </div>
+
+    <div class="col-6 col-sm-3 col-md-3">
+        @Html.LabelFor(model => model.PostalCodeNumber, htmlAttributes: new { @class = "control-label" })
+        <div>
+            @Html.EditorFor(model => model.PostalCodeNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.PostalCodeNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>

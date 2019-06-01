@@ -1,0 +1,29 @@
+﻿@model string
+    @{ string type = ViewBag?.type + "Address";}
+    @(Html.Kendo().ComboBoxFor(m => m)
+                        .DataTextField("StateName")
+                        .DataValueField("StateName")  // TODO: (HPCDS-62) once add is possible we'll have to swith to the PKey
+                        .Placeholder("Search by name or enter...")
+                        .HtmlAttributes(new { @class = "form-control" })
+                        .Filter(FilterType.Contains)
+                        .Events(e => e
+                            //.Filtering("common.func.filtering.byStates") // TODO: (HPCDS-62) On hold, for now will just filter by State/Province Names 4.19.19
+                            .Change("common.func.filtering.cbStatesConstraints")
+                        )
+                        .Enable(false)
+                        .DataSource(source =>
+                        {
+                            source
+                            .Custom().Type("odata-v4")
+                            .ServerFiltering(true)
+                            
+                            .Transport(transport => transport
+                                .Read(read => { read.Url(hpcds.Code.Constants.SystemConstants.odataUrl + "/L_State"); })
+                                        
+                            );
+                        })
+                        .CascadeFrom(type+"_CountryCd")
+                        .CascadeFromField("CountryCode")
+                        //.Template("<div class='col-12'>#: data.StateName # (#: data.AlphaCode || ' - ' #)</div>") // TODO: (HPCDS-62) Temp until we can also filter by AlphaCode
+    )
+

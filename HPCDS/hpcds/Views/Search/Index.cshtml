@@ -1,0 +1,287 @@
+﻿@model hpcds.Models.SearchViewModel
+@{
+    ViewBag.Title = "Search - Published Reports";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "SearchForm", @class = "form-horizontal", role = "form" }))
+{
+    <div class="row">
+        <div class="col-sm-2">@Html.LabelFor(m => m.States)</div>
+        <div class="col-sm-10">
+            @foreach (var stateAbbrv in Model.States)
+            {
+                var id = stateAbbrv.ToString();
+                @Html.Kendo().CheckBox().Name("State-" + id).Label(id).Checked(true).HtmlAttributes(new { name = "States", value = stateAbbrv }) <text>&nbsp;</text>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-1 offset-sm-2 col-sm-9">
+            @Html.ValidationMessageFor(m => m.States)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2">@Html.LabelFor(m => m.Type)</div>
+        <div class="col-sm-10">
+            <label>
+                @Html.RadioButtonFor(m => m.Type, hpcds.Code.Constants.SearchConstants.SearchType.All) All
+            </label>
+            &nbsp;
+            <label>
+                @Html.RadioButtonFor(m => m.Type, hpcds.Code.Constants.SearchConstants.SearchType.Chemical) Chemical(s)
+            </label>
+            &nbsp;
+            <label>
+                @Html.RadioButtonFor(m => m.Type, hpcds.Code.Constants.SearchConstants.SearchType.Company) Company
+            </label>
+            &nbsp;
+            <label>
+                @Html.RadioButtonFor(m => m.Type, hpcds.Code.Constants.SearchConstants.SearchType.Product) Product(s)
+            </label>
+        </div>
+    </div>
+
+    <div id="ChemicalSection" class="collapse">
+        <div class="row">
+            <div class="offset-1 offset-sm-2 col-sm-9">
+                @Html.ValidationMessageFor(m => m.SelectedFunction)
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-1 offset-sm-2 col-sm-9">
+                @Html.LabelFor(m => m.SelectedChemical)
+                @Html.EditorFor(m => m.SelectedChemical)
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-1 offset-sm-2 col-sm-9">
+                @Html.LabelFor(m => m.SelectedFunction)
+                @Html.EditorFor(m => m.SelectedFunction)
+            </div>
+        </div>
+        <br />
+    </div>
+
+    <div id="CompanySection" class="collapse">
+        <div class="row">
+            <div class="offset-1 offset-sm-2 col-sm-9">
+                @Html.ValidationMessageFor(m => m.OrganizationName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-1 offset-sm-2 col-sm-9">
+                @Html.LabelFor(m => m.OrganizationName)
+                @Html.EditorFor(m => m.OrganizationName)
+            </div>
+        </div>
+        <br />
+    </div>
+
+    <div id="ProductsSection" class="collapse">
+        <div class="row">
+            <div class="offset-1 offset-sm-2 col-sm-9">
+                @Html.ValidationMessageFor(m => m.SelectedComponent)
+            </div>
+        </div>
+        <div id="VTLink" class="row collapse" style="padding-top:0.5em; padding-bottom:.5em;">
+            <div class="offset-1 offset-sm-2 col-sm-9">
+                @Html.ActionLink("View VT Brand Name and Product Model data", "Products")
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-1 offset-sm-2 col-sm-9">
+                @Html.LabelFor(m => m.SelectedBricks)
+                <a class="k-icon k-i-information text-info" tabindex="0" style="text-decoration: none" data-html="true" data-toggle="popover" data-trigger="focus" title="Resource" data-content="@HPCDS.Resources.Model.SearchRes.ProductBircksTooltip"></a>
+                @Html.EditorFor(m => m.SelectedBricks)
+            </div>
+        </div>
+        <div class="row">
+            <div class="offset-1 offset-sm-2 col-sm-9">
+                @Html.LabelFor(m => m.SelectedComponent)
+                @Html.EditorFor(m => m.SelectedComponent)
+            </div>
+        </div>
+        <br />
+    </div>
+
+    <div class="row">
+        <div class="col-sm-2"> @Html.LabelFor(m => m.Period)</div>
+        <div class="col-sm-10">
+            <label>
+                @* TODO: (HPCDS-124) for bootstrap to work you need to specify a data-target *@
+                @Html.RadioButtonFor(m => m.Period, hpcds.Code.Constants.SearchConstants.ReportingPeriod.LastTwoYears) Last 2 Years
+            </label>
+            &nbsp;
+            <label>
+                @Html.RadioButtonFor(m => m.Period, hpcds.Code.Constants.SearchConstants.ReportingPeriod.All) All Reporting Periods
+            </label>
+            &nbsp;
+            <label>
+                @Html.RadioButtonFor(m => m.Period, hpcds.Code.Constants.SearchConstants.ReportingPeriod.CustomRange) Custom Range
+            </label>
+        </div>
+    </div>
+
+    <div id="DateRangeSection" class="row collapse">
+        <div class="offset-sm-2 col-sm-4">
+            @Html.LabelFor(m => m.StartDate, new { @class = "row col-sm-12" })
+            @Html.EditorFor(m => m.StartDate, new { name = "StartDate", evnt = "localFuncs.StartDateChange" })
+            @Html.ValidationMessageFor(m => m.StartDate)
+        </div>
+        <div class="col-sm-4">
+            @Html.LabelFor(m => m.EndDate, new { @class = "row col-sm-12" })
+            @Html.EditorFor(m => m.EndDate, new { name = "EndDate", evnt = "localFuncs.EndDateChange" }) @* TODO: (HPCDS-120) don't need to pass name since the name is given based on field name *@
+            @Html.ValidationMessageFor(m => m.EndDate)
+        </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+        <input type="submit" value="search" class="btn btn-lg btn-primary col-12" @*data-toggle="collapse" data-target="#results"*@ />
+    </div>
+    <div id="msg" class="collapse alert-info container">
+        The information presented here is reported to the states by manufacturers of children’s products through the IC2. The presence of a chemical in a children’s product does not necessarily mean that the product is harmful to human health or that there is any violation of existing safety standards or laws. The reporting triggers are not health-based values.
+    </div>
+}
+
+@section ResultsViews {
+
+    @(Html.Kendo().Grid<hpcds.Models.SearchReportResultsViewModel>()
+        .Name("vmReportResults")
+        .HtmlAttributes(new { style = "min-height:300px; height:80vh;", @class = "t-grid-with-filter-icon"})
+        .Columns(columns =>
+        {
+
+            columns.Bound(o => o.DUNSNumber).Width(130).Hidden(true);
+            columns.Bound(o => o.OrganizationName).Width(150).Hidden(false);
+            columns.Bound(o => o.ProductSegmentDescription).Width(150).Hidden(true);
+            columns.Bound(o => o.ProductFamilyDescription).Width(150).Hidden(true);
+            columns.Bound(o => o.ProductClassDescription).Width(150).Hidden(true);
+            columns.Bound(o => o.ProductBrickDescription).Width(200).Hidden(false);
+            columns.Bound(o => o.ComponentName).Width(200).Hidden(false);
+            columns.Bound(o => o.InaccessibleComponent).Width(100).Hidden(true);
+            columns.Bound(o => o.TargetAgeGroupDescription).Width(150).Hidden(true);
+            columns.Bound(o => o.ChemicalName).Width(250).Hidden(false);
+            columns.Bound(o => o.CASNumber).Width(100).Hidden(false);
+            columns.Bound(o => o.ConcentrationCategoryName).Width(200).Hidden(false)
+            .Filterable(m=> m.Multi(true).Search(true));
+            columns.Bound(o => o.ChemicalFunctionName).Width(150).Hidden(false);
+            columns.Bound(o => o.States).Width(80).Hidden(false);
+            columns.Bound(o => o.Period).Width(80).Hidden(true);
+            columns.Bound(o => o.UnitSoldInOR).Width(80).Hidden(true);
+            columns.Bound(o => o.UnitOfferedForSale).Width(80).Hidden(true);
+            columns.Bound(o => o.SubmittedDate).Width(150).Hidden(true).Format("{0:d}");
+            columns.Bound(o => o.FirstName).Width(150).Hidden(true);
+            columns.Bound(o => o.LastName).Width(150).Hidden(true);
+            columns.Bound(o => o.JobTitle).Width(150).Hidden(true);
+            columns.Bound(o => o.AddressLine1).Width(200).Hidden(true);
+            columns.Bound(o => o.AddressLine2).Width(200).Hidden(true);
+            columns.Bound(o => o.City).Width(130).Hidden(true);
+            columns.Bound(o => o.StateProv).Width(80).Hidden(true);
+            columns.Bound(o => o.PostalCodeNumber).Width(100).Hidden(true);
+            columns.Bound(o => o.CountryCd).Width(80).Hidden(true);
+            columns.Bound(o => o.Email).Width(150).Hidden(true);
+            columns.Bound(o => o.PhoneNumber).Width(120).Hidden(true);
+            columns.Bound(o => o.AttachedFiles).Width(120).Hidden(true);
+        })
+        .ToolBar(t => t.Excel())
+        .Excel(xlsx => xlsx
+            .FileName("Search Results of Reports.xlsx")
+            .AllPages(true)
+            .Filterable(true)
+            .ForceProxy(true)
+            .ProxyURL(Url.Action("SaveExport"))
+        )
+        .Pageable(p => p.Numeric(false).PreviousNext(false))
+        .Scrollable(sc => sc.Endless(true))
+
+        .Filterable(m => m.Operators(op => op.ForString(str => str.Clear()
+        .Contains("Contains")
+        .DoesNotContain("Does Not Contain")
+        .StartsWith("Starts With")
+        .IsEqualTo("Is Equal To")
+        .IsNotEqualTo("Is Not Equal To")
+        .EndsWith("Ends With")
+        .IsNull("Is Null")
+        .IsNotNull("Is Not Null")
+        .IsEmpty("Is Empty")
+        .IsNotEmpty("Is Not Empty")
+        .IsNullOrEmpty("Has No Value")
+        .IsNotNullOrEmpty("Has Value")
+        )))
+        .Sortable()
+        .ColumnMenu()  // TODO: (HPCDS-68) Enable user to show/hide columns, must fix CSS so it uses a different manu icon and color when filter is enabled for a column
+        .NoRecords( n => n.Template("No reports to display"))
+
+        .DataSource(source =>
+        {
+            source
+            .Custom().Type("odata-v4")
+            .ServerFiltering(true)
+            .ServerSorting(true)
+            .ServerPaging(true).PageSize(25)
+            .Transport(transport => transport
+                .Read(read => { read.Url(hpcds.Code.Constants.SystemConstants.odataUrl + "/vSearchReports")
+                                    .Data("localFuncs.GetFormFilters")
+                                    ;
+                })
+            );
+        })
+    .Events(e => e.ColumnMenuInit("localFuncs.ConcentrationFilterOrder"))
+    )
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/app/search")
+
+    <script type="text/javascript">
+
+        var localFuncs = SearchJS();
+        $(function () {
+            // Datepicker - default min-max value set
+            localFuncs.StartDateChange();
+            localFuncs.EndDateChange();
+
+            // Combobox - default hide and show based on default selected radio button
+            localFuncs.ShowHideTypes();
+            localFuncs.ShowHidePeriods();
+            @if (!User.IsInRole(hpcds.Code.Constants.UserRoles.SiteAdmin) && !User.IsInRole(hpcds.Code.Constants.UserRoles.StateAdmin))
+            {
+                <text>localFuncs.AllEnableDisableRadioOption();</text>
+            }
+
+            //Kendo validation on submit
+            localFuncs.ClientSideFormValidation();
+
+            // Bind selected values of multi-select Brick(s)
+            $("#SearchForm").submit(localFuncs.SubmitFiltersToGrid);
+
+            // TODO: (HPCDS-124) should not be needed if data-target is specified
+            // Type change event
+            $("input[type=radio][name=Type]").change(function () {
+                localFuncs.ShowHideTypes();
+                @if (!User.IsInRole(hpcds.Code.Constants.UserRoles.SiteAdmin) && !User.IsInRole(hpcds.Code.Constants.UserRoles.StateAdmin))
+                {
+                    <text>localFuncs.AllEnableDisableRadioOption();</text>
+                }
+            });
+
+            // Period change event
+            $("input[type=radio][name=Period]").change(function () {
+                localFuncs.ShowHidePeriods();
+            });
+
+            // VT checkbox display links
+            $("input[type=checkbox][name=States][value=VT]").change(function () {
+                localFuncs.ShowHideTypes();
+            });
+
+        });
+
+    </script>
+}

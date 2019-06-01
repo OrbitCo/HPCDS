@@ -1,0 +1,27 @@
+﻿@model hpcds.Models.ApplicationUser
+@if (Model == null)
+{
+    <text>None</text>
+    <br />
+    <br />
+}
+else
+{
+    @Html.DisplayTextFor(m => m.FirstName) @Html.DisplayTextFor(m => m.LastName)
+    <br />
+    @Html.DisplayTextFor(m => m.Email)
+    <br />
+    if (!string.IsNullOrEmpty(Model.PhoneNumber))
+    {
+        if (Model.PhoneInternationalFlag)
+        {
+            @Html.Label("[Non-US]")
+        }
+        else
+        {
+            @Html.Label("[US]")
+        }
+        <text>&nbsp;</text>
+        @Html.DisplayFor(m => m.PhoneNumber, new { @class = "input-medium bfh-phone" })
+    }
+}
