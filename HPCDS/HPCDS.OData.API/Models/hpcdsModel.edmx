@@ -1,0 +1,1929 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="hpcdsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Chemical">
+          <Key>
+            <PropertyRef Name="ChemicalId" />
+          </Key>
+          <Property Name="ChemicalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChemicalName" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="CASNumber" Type="varchar" MaxLength="15" />
+          <Property Name="EuropeanCommissionNumber" Type="varchar" MaxLength="50" />
+          <Property Name="EPAIdentifier" Type="varchar" MaxLength="50" />
+          <Property Name="IsSingleChemicalFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsVisibleFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CASNumberSortValue" Type="int" />
+        </EntityType>
+        <EntityType Name="ChemicalFunction">
+          <Key>
+            <PropertyRef Name="ChemicalFunctionId" />
+          </Key>
+          <Property Name="ChemicalFunctionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChemicalFunctionName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsVisibleFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="ComponentId" />
+          </Key>
+          <Property Name="ComponentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ComponentName" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="IsVisibleFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConcentrationCategory">
+          <Key>
+            <PropertyRef Name="ConcentrationCategoryId" />
+          </Key>
+          <Property Name="ConcentrationCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConcentrationCategoryName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsVisibleFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="VT_Concentration" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="CSPAOrganization">
+          <Key>
+            <PropertyRef Name="AffiliationOrganizationId" />
+          </Key>
+          <Property Name="AffiliationOrganizationId" Type="int" Nullable="false" />
+          <Property Name="OrganizationPIN" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="AccountablePartyFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsSupplierConfidentialFlag" Type="char" MaxLength="1" />
+          <Property Name="RequestSupplierConfidentialDatetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportAccountableOrganizationId" Type="int" Nullable="false" />
+          <Property Name="DocumentTitle" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="PrimaryDocumentFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="DocumentData" Type="varbinary(max)" Nullable="false" />
+          <Property Name="DocumentExtension" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DocumentSize" Type="int" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InventoryBNPM">
+          <Key>
+            <PropertyRef Name="InventoryBNPMId" />
+          </Key>
+          <Property Name="InventoryBNPMId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrganizationId" Type="int" Nullable="false" />
+          <Property Name="BrandName" Type="varchar" MaxLength="270" />
+          <Property Name="ProductModel" Type="varchar" MaxLength="270" />
+          <Property Name="IsArchived" Type="bit" />
+          <Property Name="VT_ManufacturerID" Type="nvarchar" MaxLength="50" />
+          <Property Name="VT_ManufacturerName" Type="varchar" MaxLength="1000" />
+          <Property Name="cntOfBrands" Type="int" />
+          <Property Name="cntOfModels" Type="int" />
+          <Property Name="cntOfChemicals" Type="int" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InventoryBNPMChemical">
+          <Key>
+            <PropertyRef Name="InventoryBNPMChemicalId" />
+          </Key>
+          <Property Name="InventoryBNPMChemicalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InventoryBNPMId" Type="int" Nullable="false" />
+          <Property Name="ChemicalId" Type="int" Nullable="false" />
+          <Property Name="VT_ManufacturerID" Type="nvarchar" MaxLength="50" />
+          <Property Name="VT_ChemicalID" Type="varchar" MaxLength="1000" />
+          <Property Name="VT_ChemicalNameDescription" Type="varchar" MaxLength="1000" />
+          <Property Name="VT_BrandName" Type="varchar" MaxLength="1000" />
+          <Property Name="VT_ProductModel" Type="varchar" MaxLength="1000" />
+          <Property Name="cntDisclosures" Type="int" />
+        </EntityType>
+        <EntityType Name="L_Country">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="L_State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryCode" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="AlphaCode" Type="char" MaxLength="2" />
+          <Property Name="StateName" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="FIPSCode" Type="char" MaxLength="2" />
+          <Property Name="UPDATED_BY" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UPDATED_ON" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrganizationRelationship">
+          <Key>
+            <PropertyRef Name="OrganizationRelationshipId" />
+          </Key>
+          <Property Name="OrganizationRelationshipId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportingOrganizationId" Type="int" Nullable="false" />
+          <Property Name="AccountableOrganizationId" Type="int" Nullable="false" />
+          <Property Name="BlockedFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductBrick">
+          <Key>
+            <PropertyRef Name="ProductBrickId" />
+          </Key>
+          <Property Name="ProductBrickId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductBrickCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductBrickDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ProductClassId" Type="int" Nullable="false" />
+          <Property Name="IsVisibleFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hpcds-dev.dbo.ProductCategory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="ProductBrickId" />
+            <PropertyRef Name="ProductBrickCode" />
+            <PropertyRef Name="ProductBrickDescription" />
+            <PropertyRef Name="ProductClassCode" />
+            <PropertyRef Name="ProductClassDescription" />
+            <PropertyRef Name="ProductFamilyCode" />
+            <PropertyRef Name="ProductFamilyDescription" />
+            <PropertyRef Name="ProductSegmentCode" />
+            <PropertyRef Name="ProductSegmentDescription" />
+          </Key>
+          <Property Name="ProductBrickId" Type="int" Nullable="false" />
+          <Property Name="ProductBrickCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductBrickDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ProductClassCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductClassDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ProductFamilyCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductFamilyDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ProductSegmentCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductSegmentDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductClass">
+          <Key>
+            <PropertyRef Name="ProductClassId" />
+          </Key>
+          <Property Name="ProductClassId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductClassCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductClassDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ProductFamilyId" Type="int" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductFamily">
+          <Key>
+            <PropertyRef Name="ProductFamilyId" />
+          </Key>
+          <Property Name="ProductFamilyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductFamilyCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductFamilyDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ProductSegmentId" Type="int" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductSegment">
+          <Key>
+            <PropertyRef Name="ProductSegmentId" />
+          </Key>
+          <Property Name="ProductSegmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductSegmentCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProductSegmentDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PublicViewableDateSetting">
+          <Key>
+            <PropertyRef Name="PublicViewableDateId" />
+          </Key>
+          <Property Name="PublicViewableDateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PublicViewableDate" Type="date" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="date" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductBrickId" Type="int" />
+          <Property Name="ReporterOrganizationId" Type="int" Nullable="false" />
+          <Property Name="SubmittedDate" Type="datetime" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="CopiedFromReportId" Type="int" />
+          <Property Name="ReportingState" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="WA_ReportId" Type="int" />
+          <Property Name="VT_ReportId" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ReportAccountableOrganization">
+          <Key>
+            <PropertyRef Name="ReportAccountableOrganizationId" />
+          </Key>
+          <Property Name="ReportAccountableOrganizationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportId" Type="int" Nullable="false" />
+          <Property Name="AccountableOrganizationId" Type="int" Nullable="false" />
+          <Property Name="TargetAgeGroupDescription" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RequestedConfidentialFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IsConfidentialFlag" Type="char" MaxLength="1" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportDetail">
+          <Key>
+            <PropertyRef Name="ReportDetailId" />
+          </Key>
+          <Property Name="ReportDetailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportId" Type="int" Nullable="false" />
+          <Property Name="ComponentId" Type="int" Nullable="false" />
+          <Property Name="ChemicalId" Type="int" Nullable="false" />
+          <Property Name="ChemicalFunctionId" Type="int" Nullable="false" />
+          <Property Name="ConcentrationCategoryId" Type="int" />
+          <Property Name="ConcentrationValue" Type="int" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="UserAccountId" />
+          </Key>
+          <Property Name="UserAccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AffiliationId" Type="int" Nullable="false" />
+          <Property Name="OrganizationId" Type="int" Nullable="false" />
+          <Property Name="DeletedAccountFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="BannedAccountFlag" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CreatedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="BannedReasonDescription" Type="varchar" MaxLength="2000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hpcds-dev.dbo.vInventoryBnPmByChem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vInventoryBnPmByChem">
+          <Key>
+            <PropertyRef Name="InventoryBNPMId" />
+            <PropertyRef Name="OrganizationId" />
+            <PropertyRef Name="ChemicalId" />
+          </Key>
+          <Property Name="InventoryBNPMId" Type="int" Nullable="false" />
+          <Property Name="OrganizationId" Type="int" Nullable="false" />
+          <Property Name="OrganizationName" Type="varchar" MaxLength="1000" />
+          <Property Name="ChemicalId" Type="int" Nullable="false" />
+          <Property Name="ChemicalName" Type="varchar" MaxLength="1000" />
+          <Property Name="BrandName" Type="varchar" MaxLength="270" />
+          <Property Name="ProductModel" Type="varchar" MaxLength="270" />
+          <Property Name="cntDisclosures" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hpcds-dev.dbo.vInventoryBnPmWithChem' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vInventoryBnPmWithChem">
+          <Key>
+            <PropertyRef Name="InventoryBNPMId" />
+            
+            
+          </Key>
+          <Property Name="InventoryBNPMId" Type="int" Nullable="false" />
+          <Property Name="OrganizationId" Type="int" Nullable="false" />
+          <Property Name="OrganizationName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="BrandName" Type="varchar" MaxLength="270" />
+          <Property Name="ProductModel" Type="varchar" MaxLength="270" />
+          <Property Name="ChemicalNames" Type="nvarchar(max)" />
+          <Property Name="rownum" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hpcds-dev.dbo.vInventoryByOrg' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vInventoryByOrg">
+          <Key>
+            <PropertyRef Name="OrganizationId" />
+          </Key>
+          <Property Name="OrganizationId" Type="int" Nullable="false" />
+          <Property Name="OrganizationName" Type="varchar" MaxLength="1000" />
+          <Property Name="cntOfBrands" Type="int" />
+          <Property Name="Brands" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hpcds-dev.dbo.vOrganizations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vOrganizations">
+          <Key>
+            <PropertyRef Name="ID" />
+            
+            
+            
+            <PropertyRef Name="AddressType" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="PIN" Type="nvarchar" MaxLength="8" />
+          <Property Name="OrganizationName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsLegacy" Type="bit" Nullable="false" />
+          <Property Name="LegacyWaPins" Type="nvarchar" MaxLength="36" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ContactUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="DUNSNumber" Type="nvarchar" MaxLength="9" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="150" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="40" />
+          <Property Name="StateProv" Type="nvarchar" MaxLength="70" />
+          <Property Name="PostalCodeNumber" Type="nvarchar" MaxLength="24" />
+          <Property Name="CountryCd" Type="nvarchar" MaxLength="30" />
+          <Property Name="AddressType" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hpcds-dev.dbo.vQuestions' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vQuestions">
+          <Key>
+            <PropertyRef Name="ID" />
+            
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Questions" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hpcds-dev.dbo.vSearchReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vSearchReport">
+          <Key>
+            <PropertyRef Name="OrganizationName" />
+            <PropertyRef Name="ProductBrickDescription" />
+            <PropertyRef Name="ProductClassDescription" />
+            <PropertyRef Name="ProductFamilyDescription" />
+            <PropertyRef Name="ProductSegmentDescription" />
+            <PropertyRef Name="ComponentName" />
+            <PropertyRef Name="ChemicalName" />
+            <PropertyRef Name="ConcentrationCategoryName" />
+            <PropertyRef Name="ChemicalFunctionName" />
+            <PropertyRef Name="States" />
+            <PropertyRef Name="SelectedCompany" />
+            <PropertyRef Name="SelectedComponent" />
+            <PropertyRef Name="Chemicals" />
+            <PropertyRef Name="SelectedFunction" />
+          </Key>
+          <Property Name="OrganizationName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ContactUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="DUNSNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="90" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="150" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="40" />
+          <Property Name="StateProv" Type="nvarchar" MaxLength="70" />
+          <Property Name="PostalCodeNumber" Type="nvarchar" MaxLength="24" />
+          <Property Name="CountryCd" Type="nvarchar" MaxLength="30" />
+          <Property Name="ProductBrickDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ProductClassDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ProductFamilyDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ProductSegmentDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="ComponentName" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="InaccessibleComponent" Type="bit" />
+          <Property Name="ProductBrandName" Type="varchar" MaxLength="3" />
+          <Property Name="ProductModel" Type="varchar" MaxLength="3" />
+          <Property Name="UnitSoldInOR" Type="int" />
+          <Property Name="UnitOfferedForSale" Type="int" />
+          <Property Name="AttachedFiles" Type="varchar" MaxLength="3" />
+          <Property Name="ChemicalName" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="CASNumber" Type="varchar" MaxLength="15" />
+          <Property Name="ConcentrationCategoryName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="ChemicalFunctionName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="States" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Period" Type="int" />
+          <Property Name="SubmittedDate" Type="datetime" />
+          <Property Name="SelectedCompany" Type="int" Nullable="false" />
+          <Property Name="TargetAgeGroupDescription" Type="varchar" MaxLength="50" />
+          <Property Name="ProductBricks" Type="int" />
+          <Property Name="SelectedComponent" Type="int" Nullable="false" />
+          <Property Name="Chemicals" Type="int" Nullable="false" />
+          <Property Name="SelectedFunction" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hpcds-dev.dbo.vUserRoles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vUserRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_InventoryBNPMChemical_Chemical">
+          <End Role="Chemical" Type="Self.Chemical" Multiplicity="1" />
+          <End Role="InventoryBNPMChemical" Type="Self.InventoryBNPMChemical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chemical">
+              <PropertyRef Name="ChemicalId" />
+            </Principal>
+            <Dependent Role="InventoryBNPMChemical">
+              <PropertyRef Name="ChemicalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryBNPMChemical_InventoryBNPM">
+          <End Role="InventoryBNPM" Type="Self.InventoryBNPM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InventoryBNPMChemical" Type="Self.InventoryBNPMChemical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryBNPM">
+              <PropertyRef Name="InventoryBNPMId" />
+            </Principal>
+            <Dependent Role="InventoryBNPMChemical">
+              <PropertyRef Name="InventoryBNPMId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_L_State_L_Country">
+          <End Role="L_Country" Type="Self.L_Country" Multiplicity="1" />
+          <End Role="L_State" Type="Self.L_State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="L_Country">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="L_State">
+              <PropertyRef Name="CountryCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hpcdsModelStoreContainer">
+          <EntitySet Name="Chemical" EntityType="Self.Chemical" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChemicalFunction" EntityType="Self.ChemicalFunction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Component" EntityType="Self.Component" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConcentrationCategory" EntityType="Self.ConcentrationCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CSPAOrganization" EntityType="Self.CSPAOrganization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryBNPM" EntityType="Self.InventoryBNPM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryBNPMChemical" EntityType="Self.InventoryBNPMChemical" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="L_Country" EntityType="Self.L_Country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="L_State" EntityType="Self.L_State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrganizationRelationship" EntityType="Self.OrganizationRelationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductBrick" EntityType="Self.ProductBrick" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductClass" EntityType="Self.ProductClass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductFamily" EntityType="Self.ProductFamily" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductSegment" EntityType="Self.ProductSegment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PublicViewableDateSetting" EntityType="Self.PublicViewableDateSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportAccountableOrganization" EntityType="Self.ReportAccountableOrganization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportDetail" EntityType="Self.ReportDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProductCategory].[ProductBrickId] AS [ProductBrickId], 
+    [ProductCategory].[ProductBrickCode] AS [ProductBrickCode], 
+    [ProductCategory].[ProductBrickDescription] AS [ProductBrickDescription], 
+    [ProductCategory].[ProductClassCode] AS [ProductClassCode], 
+    [ProductCategory].[ProductClassDescription] AS [ProductClassDescription], 
+    [ProductCategory].[ProductFamilyCode] AS [ProductFamilyCode], 
+    [ProductCategory].[ProductFamilyDescription] AS [ProductFamilyDescription], 
+    [ProductCategory].[ProductSegmentCode] AS [ProductSegmentCode], 
+    [ProductCategory].[ProductSegmentDescription] AS [ProductSegmentDescription]
+    FROM [dbo].[ProductCategory] AS [ProductCategory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vInventoryBnPmByChem" EntityType="Self.vInventoryBnPmByChem" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vInventoryBnPmByChem].[InventoryBNPMId] AS [InventoryBNPMId], 
+    [vInventoryBnPmByChem].[OrganizationId] AS [OrganizationId], 
+    [vInventoryBnPmByChem].[OrganizationName] AS [OrganizationName], 
+    [vInventoryBnPmByChem].[ChemicalId] AS [ChemicalId], 
+    [vInventoryBnPmByChem].[ChemicalName] AS [ChemicalName], 
+    [vInventoryBnPmByChem].[BrandName] AS [BrandName], 
+    [vInventoryBnPmByChem].[ProductModel] AS [ProductModel], 
+    [vInventoryBnPmByChem].[cntDisclosures] AS [cntDisclosures]
+    FROM [dbo].[vInventoryBnPmByChem] AS [vInventoryBnPmByChem]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vInventoryBnPmWithChem" EntityType="Self.vInventoryBnPmWithChem" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vInventoryBnPmWithChem].[InventoryBNPMId] AS [InventoryBNPMId], 
+    [vInventoryBnPmWithChem].[OrganizationId] AS [OrganizationId], 
+    [vInventoryBnPmWithChem].[OrganizationName] AS [OrganizationName], 
+    [vInventoryBnPmWithChem].[BrandName] AS [BrandName], 
+    [vInventoryBnPmWithChem].[ProductModel] AS [ProductModel], 
+    [vInventoryBnPmWithChem].[ChemicalNames] AS [ChemicalNames], 
+    [vInventoryBnPmWithChem].[rownum] AS [rownum]
+    FROM [dbo].[vInventoryBnPmWithChem] AS [vInventoryBnPmWithChem]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vInventoryByOrg" EntityType="Self.vInventoryByOrg" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vInventoryByOrg].[OrganizationId] AS [OrganizationId], 
+    [vInventoryByOrg].[OrganizationName] AS [OrganizationName], 
+    [vInventoryByOrg].[cntOfBrands] AS [cntOfBrands], 
+    [vInventoryByOrg].[Brands] AS [Brands]
+    FROM [dbo].[vInventoryByOrg] AS [vInventoryByOrg]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vOrganizations" EntityType="Self.vOrganizations" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vOrganizations].[ID] AS [ID], 
+    [vOrganizations].[PIN] AS [PIN], 
+    [vOrganizations].[OrganizationName] AS [OrganizationName], 
+    [vOrganizations].[IsLegacy] AS [IsLegacy], 
+    [vOrganizations].[LegacyWaPins] AS [LegacyWaPins], 
+    [vOrganizations].[IsActive] AS [IsActive], 
+    [vOrganizations].[ContactUserId] AS [ContactUserId], 
+    [vOrganizations].[DUNSNumber] AS [DUNSNumber], 
+    [vOrganizations].[Email] AS [Email], 
+    [vOrganizations].[PhoneNumber] AS [PhoneNumber], 
+    [vOrganizations].[FirstName] AS [FirstName], 
+    [vOrganizations].[LastName] AS [LastName], 
+    [vOrganizations].[JobTitle] AS [JobTitle], 
+    [vOrganizations].[AddressLine1] AS [AddressLine1], 
+    [vOrganizations].[AddressLine2] AS [AddressLine2], 
+    [vOrganizations].[City] AS [City], 
+    [vOrganizations].[StateProv] AS [StateProv], 
+    [vOrganizations].[PostalCodeNumber] AS [PostalCodeNumber], 
+    [vOrganizations].[CountryCd] AS [CountryCd], 
+    [vOrganizations].[AddressType] AS [AddressType]
+    FROM [dbo].[vOrganizations] AS [vOrganizations]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vQuestions" EntityType="Self.vQuestions" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vQuestions].[ID] AS [ID], 
+    [vQuestions].[Questions] AS [Questions]
+    FROM [dbo].[vQuestions] AS [vQuestions]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vSearchReport" EntityType="Self.vSearchReport" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vSearchReport].[OrganizationName] AS [OrganizationName], 
+    [vSearchReport].[ContactUserId] AS [ContactUserId], 
+    [vSearchReport].[DUNSNumber] AS [DUNSNumber], 
+    [vSearchReport].[Email] AS [Email], 
+    [vSearchReport].[PhoneNumber] AS [PhoneNumber], 
+    [vSearchReport].[FirstName] AS [FirstName], 
+    [vSearchReport].[LastName] AS [LastName], 
+    [vSearchReport].[JobTitle] AS [JobTitle], 
+    [vSearchReport].[AddressLine1] AS [AddressLine1], 
+    [vSearchReport].[AddressLine2] AS [AddressLine2], 
+    [vSearchReport].[City] AS [City], 
+    [vSearchReport].[StateProv] AS [StateProv], 
+    [vSearchReport].[PostalCodeNumber] AS [PostalCodeNumber], 
+    [vSearchReport].[CountryCd] AS [CountryCd], 
+    [vSearchReport].[ProductBrickDescription] AS [ProductBrickDescription], 
+    [vSearchReport].[ProductClassDescription] AS [ProductClassDescription], 
+    [vSearchReport].[ProductFamilyDescription] AS [ProductFamilyDescription], 
+    [vSearchReport].[ProductSegmentDescription] AS [ProductSegmentDescription], 
+    [vSearchReport].[ComponentName] AS [ComponentName], 
+    [vSearchReport].[InaccessibleComponent] AS [InaccessibleComponent], 
+    [vSearchReport].[ProductBrandName] AS [ProductBrandName], 
+    [vSearchReport].[ProductModel] AS [ProductModel], 
+    [vSearchReport].[UnitSoldInOR] AS [UnitSoldInOR], 
+    [vSearchReport].[UnitOfferedForSale] AS [UnitOfferedForSale], 
+    [vSearchReport].[AttachedFiles] AS [AttachedFiles], 
+    [vSearchReport].[ChemicalName] AS [ChemicalName], 
+    [vSearchReport].[CASNumber] AS [CASNumber], 
+    [vSearchReport].[ConcentrationCategoryName] AS [ConcentrationCategoryName], 
+    [vSearchReport].[ChemicalFunctionName] AS [ChemicalFunctionName], 
+    [vSearchReport].[States] AS [States], 
+    [vSearchReport].[Period] AS [Period], 
+    [vSearchReport].[SubmittedDate] AS [SubmittedDate], 
+    [vSearchReport].[SelectedCompany] AS [SelectedCompany], 
+    [vSearchReport].[TargetAgeGroupDescription] AS [TargetAgeGroupDescription], 
+    [vSearchReport].[ProductBricks] AS [ProductBricks], 
+    [vSearchReport].[SelectedComponent] AS [SelectedComponent], 
+    [vSearchReport].[Chemicals] AS [Chemicals], 
+    [vSearchReport].[SelectedFunction] AS [SelectedFunction]
+    FROM [dbo].[vSearchReport] AS [vSearchReport]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vUserRoles" EntityType="Self.vUserRoles" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vUserRoles].[Id] AS [Id], 
+    [vUserRoles].[Name] AS [Name]
+    FROM [dbo].[vUserRoles] AS [vUserRoles]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_InventoryBNPMChemical_Chemical" Association="Self.FK_InventoryBNPMChemical_Chemical">
+            <End Role="Chemical" EntitySet="Chemical" />
+            <End Role="InventoryBNPMChemical" EntitySet="InventoryBNPMChemical" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryBNPMChemical_InventoryBNPM" Association="Self.FK_InventoryBNPMChemical_InventoryBNPM">
+            <End Role="InventoryBNPM" EntitySet="InventoryBNPM" />
+            <End Role="InventoryBNPMChemical" EntitySet="InventoryBNPMChemical" />
+          </AssociationSet>
+          <AssociationSet Name="FK_L_State_L_Country" Association="Self.FK_L_State_L_Country">
+            <End Role="L_Country" EntitySet="L_Country" />
+            <End Role="L_State" EntitySet="L_State" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hpcdsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Chemical">
+          <Key>
+            <PropertyRef Name="ChemicalId" />
+          </Key>
+          <Property Name="ChemicalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChemicalName" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CASNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EuropeanCommissionNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EPAIdentifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsSingleChemicalFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IsVisibleFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CASNumberSortValue" Type="Int32" />
+          <NavigationProperty Name="ReportDetails" Relationship="Self.FK_ReportDetail_Chemical" FromRole="Chemical" ToRole="ReportDetail" />
+          <NavigationProperty Name="InventoryBNPMChemicals" Relationship="hpcdsModel.FK_InventoryBNPMChemical_Chemical" FromRole="Chemical" ToRole="InventoryBNPMChemical" />
+        </EntityType>
+        <EntityType Name="ChemicalFunction">
+          <Key>
+            <PropertyRef Name="ChemicalFunctionId" />
+          </Key>
+          <Property Name="ChemicalFunctionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChemicalFunctionName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsVisibleFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ReportDetails" Relationship="Self.FK_ReportDetail_ChemicalFunction" FromRole="ChemicalFunction" ToRole="ReportDetail" />
+        </EntityType>
+        <EntityType Name="Component">
+          <Key>
+            <PropertyRef Name="ComponentId" />
+          </Key>
+          <Property Name="ComponentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ComponentName" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsVisibleFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ReportDetails" Relationship="Self.FK_ReportDetail_Component" FromRole="Component" ToRole="ReportDetail" />
+        </EntityType>
+        <EntityType Name="ConcentrationCategory">
+          <Key>
+            <PropertyRef Name="ConcentrationCategoryId" />
+          </Key>
+          <Property Name="ConcentrationCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConcentrationCategoryName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsVisibleFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ReportDetails" Relationship="Self.FK_ReportDetail_ConcentrationCategory" FromRole="ConcentrationCategory" ToRole="ReportDetail" />
+          <Property Name="VT_Concentration" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CSPAOrganization">
+          <Key>
+            <PropertyRef Name="AffiliationOrganizationId" />
+          </Key>
+          <Property Name="AffiliationOrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationPIN" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccountablePartyFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsSupplierConfidentialFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="RequestSupplierConfidentialDatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="OrganizationRelationships" Relationship="Self.FK_OrganizationRelationship_AccountableOrganization" FromRole="CSPAOrganization" ToRole="OrganizationRelationship" />
+          <NavigationProperty Name="OrganizationRelationships1" Relationship="Self.FK_OrganizationRelationship_ReportingOrganization" FromRole="CSPAOrganization" ToRole="OrganizationRelationship" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Report_CSPAOrganization" FromRole="CSPAOrganization" ToRole="Report" />
+          <NavigationProperty Name="ReportAccountableOrganizations" Relationship="Self.FK_ReportAccountableOrganization_CSPAOrganization" FromRole="CSPAOrganization" ToRole="ReportAccountableOrganization" />
+          <NavigationProperty Name="UserAccounts" Relationship="Self.FK_UserAccount_CSPAOrganization" FromRole="CSPAOrganization" ToRole="UserAccount" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportAccountableOrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="DocumentTitle" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PrimaryDocumentFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DocumentData" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="DocumentExtension" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DocumentSize" Type="Int32" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ReportAccountableOrganization" Relationship="Self.FK_Document_ReportAccountableOrganization" FromRole="Document" ToRole="ReportAccountableOrganization" />
+        </EntityType>
+        <EntityType Name="OrganizationRelationship">
+          <Key>
+            <PropertyRef Name="OrganizationRelationshipId" />
+          </Key>
+          <Property Name="OrganizationRelationshipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportingOrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="AccountableOrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="BlockedFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CSPAOrganization" Relationship="Self.FK_OrganizationRelationship_AccountableOrganization" FromRole="OrganizationRelationship" ToRole="CSPAOrganization" />
+          <NavigationProperty Name="CSPAOrganization1" Relationship="Self.FK_OrganizationRelationship_ReportingOrganization" FromRole="OrganizationRelationship" ToRole="CSPAOrganization" />
+        </EntityType>
+        <EntityType Name="ProductBrick">
+          <Key>
+            <PropertyRef Name="ProductBrickId" />
+          </Key>
+          <Property Name="ProductBrickId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductBrickCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductBrickDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductClassId" Type="Int32" Nullable="false" />
+          <Property Name="IsVisibleFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ProductClass" Relationship="Self.FK_ProductBrick_ProductClass" FromRole="ProductBrick" ToRole="ProductClass" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Report_ProductBrick" FromRole="ProductBrick" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="ProductClass">
+          <Key>
+            <PropertyRef Name="ProductClassId" />
+          </Key>
+          <Property Name="ProductClassId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductClassCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductClassDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductFamilyId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ProductBricks" Relationship="Self.FK_ProductBrick_ProductClass" FromRole="ProductClass" ToRole="ProductBrick" />
+          <NavigationProperty Name="ProductFamily" Relationship="Self.FK_ProductClass_ProductFamily" FromRole="ProductClass" ToRole="ProductFamily" />
+        </EntityType>
+        <EntityType Name="ProductFamily">
+          <Key>
+            <PropertyRef Name="ProductFamilyId" />
+          </Key>
+          <Property Name="ProductFamilyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductFamilyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductFamilyDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductSegmentId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ProductClasses" Relationship="Self.FK_ProductClass_ProductFamily" FromRole="ProductFamily" ToRole="ProductClass" />
+          <NavigationProperty Name="ProductSegment" Relationship="Self.FK_ProductFamily_ProductSegment" FromRole="ProductFamily" ToRole="ProductSegment" />
+        </EntityType>
+        <EntityType Name="ProductSegment">
+          <Key>
+            <PropertyRef Name="ProductSegmentId" />
+          </Key>
+          <Property Name="ProductSegmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductSegmentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductSegmentDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ProductFamilies" Relationship="Self.FK_ProductFamily_ProductSegment" FromRole="ProductSegment" ToRole="ProductFamily" />
+        </EntityType>
+        <EntityType Name="PublicViewableDateSetting">
+          <Key>
+            <PropertyRef Name="PublicViewableDateId" />
+          </Key>
+          <Property Name="PublicViewableDateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PublicViewableDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductBrickId" Type="Int32" />
+          <Property Name="ReporterOrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="SubmittedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CopiedFromReportId" Type="Int32" />
+          <NavigationProperty Name="CSPAOrganization" Relationship="Self.FK_Report_CSPAOrganization" FromRole="Report" ToRole="CSPAOrganization" />
+          <NavigationProperty Name="ProductBrick" Relationship="Self.FK_Report_ProductBrick" FromRole="Report" ToRole="ProductBrick" />
+          <NavigationProperty Name="ReportAccountableOrganizations" Relationship="Self.FK_ReportAccountableOrganization_Report" FromRole="Report" ToRole="ReportAccountableOrganization" />
+          <NavigationProperty Name="ReportDetails" Relationship="Self.FK_ReportDetail_Report" FromRole="Report" ToRole="ReportDetail" />
+          <Property Name="ReportingState" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="WA_ReportId" Type="Int32" />
+          <Property Name="VT_ReportId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ReportAccountableOrganization">
+          <Key>
+            <PropertyRef Name="ReportAccountableOrganizationId" />
+          </Key>
+          <Property Name="ReportAccountableOrganizationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportId" Type="Int32" Nullable="false" />
+          <Property Name="AccountableOrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="TargetAgeGroupDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RequestedConfidentialFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IsConfidentialFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CSPAOrganization" Relationship="Self.FK_ReportAccountableOrganization_CSPAOrganization" FromRole="ReportAccountableOrganization" ToRole="CSPAOrganization" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_Document_ReportAccountableOrganization" FromRole="ReportAccountableOrganization" ToRole="Document" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_ReportAccountableOrganization_Report" FromRole="ReportAccountableOrganization" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="ReportDetail">
+          <Key>
+            <PropertyRef Name="ReportDetailId" />
+          </Key>
+          <Property Name="ReportDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportId" Type="Int32" Nullable="false" />
+          <Property Name="ComponentId" Type="Int32" Nullable="false" />
+          <Property Name="ChemicalId" Type="Int32" Nullable="false" />
+          <Property Name="ChemicalFunctionId" Type="Int32" Nullable="false" />
+          <Property Name="ConcentrationCategoryId" Type="Int32" />
+          <Property Name="ConcentrationValue" Type="Int32" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Chemical" Relationship="Self.FK_ReportDetail_Chemical" FromRole="ReportDetail" ToRole="Chemical" />
+          <NavigationProperty Name="ChemicalFunction" Relationship="Self.FK_ReportDetail_ChemicalFunction" FromRole="ReportDetail" ToRole="ChemicalFunction" />
+          <NavigationProperty Name="Component" Relationship="Self.FK_ReportDetail_Component" FromRole="ReportDetail" ToRole="Component" />
+          <NavigationProperty Name="ConcentrationCategory" Relationship="Self.FK_ReportDetail_ConcentrationCategory" FromRole="ReportDetail" ToRole="ConcentrationCategory" />
+          <NavigationProperty Name="Report" Relationship="Self.FK_ReportDetail_Report" FromRole="ReportDetail" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="UserAccountId" />
+          </Key>
+          <Property Name="UserAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AffiliationId" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="DeletedAccountFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="BannedAccountFlag" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CreatedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BannedReasonDescription" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CSPAOrganization" Relationship="Self.FK_UserAccount_CSPAOrganization" FromRole="UserAccount" ToRole="CSPAOrganization" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="ProductBrickId" />
+            <PropertyRef Name="ProductBrickCode" />
+            <PropertyRef Name="ProductBrickDescription" />
+            <PropertyRef Name="ProductClassCode" />
+            <PropertyRef Name="ProductClassDescription" />
+            <PropertyRef Name="ProductFamilyCode" />
+            <PropertyRef Name="ProductFamilyDescription" />
+            <PropertyRef Name="ProductSegmentCode" />
+            <PropertyRef Name="ProductSegmentDescription" />
+          </Key>
+          <Property Name="ProductBrickId" Type="Int32" Nullable="false" />
+          <Property Name="ProductBrickCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductBrickDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductClassCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductClassDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductFamilyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductFamilyDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductSegmentCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductSegmentDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ReportDetail_Chemical">
+          <End Role="Chemical" Type="Self.Chemical" Multiplicity="1" />
+          <End Role="ReportDetail" Type="Self.ReportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chemical">
+              <PropertyRef Name="ChemicalId" />
+            </Principal>
+            <Dependent Role="ReportDetail">
+              <PropertyRef Name="ChemicalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportDetail_ChemicalFunction">
+          <End Role="ChemicalFunction" Type="Self.ChemicalFunction" Multiplicity="1" />
+          <End Role="ReportDetail" Type="Self.ReportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChemicalFunction">
+              <PropertyRef Name="ChemicalFunctionId" />
+            </Principal>
+            <Dependent Role="ReportDetail">
+              <PropertyRef Name="ChemicalFunctionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportDetail_Component">
+          <End Role="Component" Type="Self.Component" Multiplicity="1" />
+          <End Role="ReportDetail" Type="Self.ReportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Component">
+              <PropertyRef Name="ComponentId" />
+            </Principal>
+            <Dependent Role="ReportDetail">
+              <PropertyRef Name="ComponentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportDetail_ConcentrationCategory">
+          <End Role="ConcentrationCategory" Type="Self.ConcentrationCategory" Multiplicity="0..1" />
+          <End Role="ReportDetail" Type="Self.ReportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConcentrationCategory">
+              <PropertyRef Name="ConcentrationCategoryId" />
+            </Principal>
+            <Dependent Role="ReportDetail">
+              <PropertyRef Name="ConcentrationCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganizationRelationship_AccountableOrganization">
+          <End Role="CSPAOrganization" Type="Self.CSPAOrganization" Multiplicity="1" />
+          <End Role="OrganizationRelationship" Type="Self.OrganizationRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSPAOrganization">
+              <PropertyRef Name="AffiliationOrganizationId" />
+            </Principal>
+            <Dependent Role="OrganizationRelationship">
+              <PropertyRef Name="AccountableOrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrganizationRelationship_ReportingOrganization">
+          <End Role="CSPAOrganization" Type="Self.CSPAOrganization" Multiplicity="1" />
+          <End Role="OrganizationRelationship" Type="Self.OrganizationRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSPAOrganization">
+              <PropertyRef Name="AffiliationOrganizationId" />
+            </Principal>
+            <Dependent Role="OrganizationRelationship">
+              <PropertyRef Name="ReportingOrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_CSPAOrganization">
+          <End Role="CSPAOrganization" Type="Self.CSPAOrganization" Multiplicity="1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSPAOrganization">
+              <PropertyRef Name="AffiliationOrganizationId" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="ReporterOrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportAccountableOrganization_CSPAOrganization">
+          <End Role="CSPAOrganization" Type="Self.CSPAOrganization" Multiplicity="1" />
+          <End Role="ReportAccountableOrganization" Type="Self.ReportAccountableOrganization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSPAOrganization">
+              <PropertyRef Name="AffiliationOrganizationId" />
+            </Principal>
+            <Dependent Role="ReportAccountableOrganization">
+              <PropertyRef Name="AccountableOrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccount_CSPAOrganization">
+          <End Role="CSPAOrganization" Type="Self.CSPAOrganization" Multiplicity="1" />
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSPAOrganization">
+              <PropertyRef Name="AffiliationOrganizationId" />
+            </Principal>
+            <Dependent Role="UserAccount">
+              <PropertyRef Name="OrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_ReportAccountableOrganization">
+          <End Role="ReportAccountableOrganization" Type="Self.ReportAccountableOrganization" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReportAccountableOrganization">
+              <PropertyRef Name="ReportAccountableOrganizationId" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="ReportAccountableOrganizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductBrick_ProductClass">
+          <End Role="ProductClass" Type="Self.ProductClass" Multiplicity="1" />
+          <End Role="ProductBrick" Type="Self.ProductBrick" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductClass">
+              <PropertyRef Name="ProductClassId" />
+            </Principal>
+            <Dependent Role="ProductBrick">
+              <PropertyRef Name="ProductClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Report_ProductBrick">
+          <End Role="ProductBrick" Type="Self.ProductBrick" Multiplicity="0..1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductBrick">
+              <PropertyRef Name="ProductBrickId" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="ProductBrickId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductClass_ProductFamily">
+          <End Role="ProductFamily" Type="Self.ProductFamily" Multiplicity="1" />
+          <End Role="ProductClass" Type="Self.ProductClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductFamily">
+              <PropertyRef Name="ProductFamilyId" />
+            </Principal>
+            <Dependent Role="ProductClass">
+              <PropertyRef Name="ProductFamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductFamily_ProductSegment">
+          <End Role="ProductSegment" Type="Self.ProductSegment" Multiplicity="1" />
+          <End Role="ProductFamily" Type="Self.ProductFamily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductSegment">
+              <PropertyRef Name="ProductSegmentId" />
+            </Principal>
+            <Dependent Role="ProductFamily">
+              <PropertyRef Name="ProductSegmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportAccountableOrganization_Report">
+          <End Role="Report" Type="Self.Report" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReportAccountableOrganization" Type="Self.ReportAccountableOrganization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="ReportAccountableOrganization">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReportDetail_Report">
+          <End Role="Report" Type="Self.Report" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ReportDetail" Type="Self.ReportDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Report">
+              <PropertyRef Name="ReportId" />
+            </Principal>
+            <Dependent Role="ReportDetail">
+              <PropertyRef Name="ReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hpcdsDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Chemicals" EntityType="Self.Chemical" />
+          <EntitySet Name="ChemicalFunctions" EntityType="Self.ChemicalFunction" />
+          <EntitySet Name="Components" EntityType="Self.Component" />
+          <EntitySet Name="ConcentrationCategories" EntityType="Self.ConcentrationCategory" />
+          <EntitySet Name="CSPAOrganizations" EntityType="Self.CSPAOrganization" />
+          <EntitySet Name="Documents" EntityType="Self.Document" />
+          <EntitySet Name="OrganizationRelationships" EntityType="Self.OrganizationRelationship" />
+          <EntitySet Name="ProductBricks" EntityType="Self.ProductBrick" />
+          <EntitySet Name="ProductClasses" EntityType="Self.ProductClass" />
+          <EntitySet Name="ProductFamilies" EntityType="Self.ProductFamily" />
+          <EntitySet Name="ProductSegments" EntityType="Self.ProductSegment" />
+          <EntitySet Name="PublicViewableDateSettings" EntityType="Self.PublicViewableDateSetting" />
+          <EntitySet Name="Reports" EntityType="Self.Report" />
+          <EntitySet Name="ReportAccountableOrganizations" EntityType="Self.ReportAccountableOrganization" />
+          <EntitySet Name="ReportDetails" EntityType="Self.ReportDetail" />
+          <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
+          <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+          <AssociationSet Name="FK_ReportDetail_Chemical" Association="Self.FK_ReportDetail_Chemical">
+            <End Role="Chemical" EntitySet="Chemicals" />
+            <End Role="ReportDetail" EntitySet="ReportDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportDetail_ChemicalFunction" Association="Self.FK_ReportDetail_ChemicalFunction">
+            <End Role="ChemicalFunction" EntitySet="ChemicalFunctions" />
+            <End Role="ReportDetail" EntitySet="ReportDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportDetail_Component" Association="Self.FK_ReportDetail_Component">
+            <End Role="Component" EntitySet="Components" />
+            <End Role="ReportDetail" EntitySet="ReportDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportDetail_ConcentrationCategory" Association="Self.FK_ReportDetail_ConcentrationCategory">
+            <End Role="ConcentrationCategory" EntitySet="ConcentrationCategories" />
+            <End Role="ReportDetail" EntitySet="ReportDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganizationRelationship_AccountableOrganization" Association="Self.FK_OrganizationRelationship_AccountableOrganization">
+            <End Role="CSPAOrganization" EntitySet="CSPAOrganizations" />
+            <End Role="OrganizationRelationship" EntitySet="OrganizationRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrganizationRelationship_ReportingOrganization" Association="Self.FK_OrganizationRelationship_ReportingOrganization">
+            <End Role="CSPAOrganization" EntitySet="CSPAOrganizations" />
+            <End Role="OrganizationRelationship" EntitySet="OrganizationRelationships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_CSPAOrganization" Association="Self.FK_Report_CSPAOrganization">
+            <End Role="CSPAOrganization" EntitySet="CSPAOrganizations" />
+            <End Role="Report" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportAccountableOrganization_CSPAOrganization" Association="Self.FK_ReportAccountableOrganization_CSPAOrganization">
+            <End Role="CSPAOrganization" EntitySet="CSPAOrganizations" />
+            <End Role="ReportAccountableOrganization" EntitySet="ReportAccountableOrganizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccount_CSPAOrganization" Association="Self.FK_UserAccount_CSPAOrganization">
+            <End Role="CSPAOrganization" EntitySet="CSPAOrganizations" />
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_ReportAccountableOrganization" Association="Self.FK_Document_ReportAccountableOrganization">
+            <End Role="ReportAccountableOrganization" EntitySet="ReportAccountableOrganizations" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductBrick_ProductClass" Association="Self.FK_ProductBrick_ProductClass">
+            <End Role="ProductClass" EntitySet="ProductClasses" />
+            <End Role="ProductBrick" EntitySet="ProductBricks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Report_ProductBrick" Association="Self.FK_Report_ProductBrick">
+            <End Role="ProductBrick" EntitySet="ProductBricks" />
+            <End Role="Report" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductClass_ProductFamily" Association="Self.FK_ProductClass_ProductFamily">
+            <End Role="ProductFamily" EntitySet="ProductFamilies" />
+            <End Role="ProductClass" EntitySet="ProductClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductFamily_ProductSegment" Association="Self.FK_ProductFamily_ProductSegment">
+            <End Role="ProductSegment" EntitySet="ProductSegments" />
+            <End Role="ProductFamily" EntitySet="ProductFamilies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportAccountableOrganization_Report" Association="Self.FK_ReportAccountableOrganization_Report">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="ReportAccountableOrganization" EntitySet="ReportAccountableOrganizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReportDetail_Report" Association="Self.FK_ReportDetail_Report">
+            <End Role="Report" EntitySet="Reports" />
+            <End Role="ReportDetail" EntitySet="ReportDetails" />
+          </AssociationSet>
+          <EntitySet Name="vQuestions" EntityType="hpcdsModel.vQuestion" />
+          <EntitySet Name="vUserRoles" EntityType="hpcdsModel.vUserRole" />
+          <EntitySet Name="vOrganizations" EntityType="hpcdsModel.vOrganization" />
+          <EntitySet Name="L_Country" EntityType="hpcdsModel.L_Country" />
+          <EntitySet Name="L_State" EntityType="hpcdsModel.L_State" />
+          <AssociationSet Name="FK_L_State_L_Country" Association="hpcdsModel.FK_L_State_L_Country">
+            <End Role="L_Country" EntitySet="L_Country" />
+            <End Role="L_State" EntitySet="L_State" />
+          </AssociationSet>
+          <EntitySet Name="InventoryBNPMs" EntityType="hpcdsModel.InventoryBNPM" />
+          <EntitySet Name="InventoryBNPMChemicals" EntityType="hpcdsModel.InventoryBNPMChemical" />
+          <AssociationSet Name="FK_InventoryBNPMChemical_InventoryBNPM" Association="hpcdsModel.FK_InventoryBNPMChemical_InventoryBNPM">
+            <End Role="InventoryBNPM" EntitySet="InventoryBNPMs" />
+            <End Role="InventoryBNPMChemical" EntitySet="InventoryBNPMChemicals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryBNPMChemical_Chemical" Association="hpcdsModel.FK_InventoryBNPMChemical_Chemical">
+            <End Role="Chemical" EntitySet="Chemicals" />
+            <End Role="InventoryBNPMChemical" EntitySet="InventoryBNPMChemicals" />
+          </AssociationSet>
+          <EntitySet Name="vInventoryByOrgs" EntityType="hpcdsModel.vInventoryByOrg" />
+          <EntitySet Name="vInventoryBnPmByChems" EntityType="hpcdsModel.vInventoryBnPmByChem" />
+          <EntitySet Name="vSearchReports" EntityType="hpcdsModel.vSearchReport" />
+          <EntitySet Name="vInventoryBnPmWithChems" EntityType="hpcdsModel.vInventoryBnPmWithChem" />
+        </EntityContainer>
+        <EntityType Name="vQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Questions" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vUserRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vOrganization">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="AddressType" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PIN" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="OrganizationName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsLegacy" Type="Boolean" Nullable="false" />
+          <Property Name="LegacyWaPins" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ContactUserId" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="DUNSNumber" Type="String" MaxLength="9" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="StateProv" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCodeNumber" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="CountryCd" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="AddressType" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="L_Country">
+          <Key>
+            <PropertyRef Name="Code" />
+          </Key>
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="CountryName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="L_State" Relationship="hpcdsModel.FK_L_State_L_Country" FromRole="L_Country" ToRole="L_State" />
+        </EntityType>
+        <EntityType Name="L_State">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryCode" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="AlphaCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="StateName" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="FIPSCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false"  />
+          <NavigationProperty Name="L_Country" Relationship="hpcdsModel.FK_L_State_L_Country" FromRole="L_State" ToRole="L_Country" />
+          <Property Name="UPDATED_BY" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UPDATED_ON" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_L_State_L_Country">
+          <End Type="hpcdsModel.L_Country" Role="L_Country" Multiplicity="1" />
+          <End Type="hpcdsModel.L_State" Role="L_State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="L_Country">
+              <PropertyRef Name="Code" />
+            </Principal>
+            <Dependent Role="L_State">
+              <PropertyRef Name="CountryCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="InventoryBNPM">
+          <Key>
+            <PropertyRef Name="InventoryBNPMId" />
+          </Key>
+          <Property Name="InventoryBNPMId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="BrandName" Type="String" MaxLength="270" FixedLength="false" Unicode="false" />
+          <Property Name="ProductModel" Type="String" MaxLength="270" FixedLength="false" Unicode="false" />
+          <Property Name="IsArchived" Type="Boolean" />
+          <Property Name="VT_ManufacturerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VT_ManufacturerName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="cntOfBrands" Type="Int32" />
+          <Property Name="cntOfModels" Type="Int32" />
+          <Property Name="cntOfChemicals" Type="Int32" />
+          <Property Name="CreatedByName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="InventoryBNPMChemicals" Relationship="hpcdsModel.FK_InventoryBNPMChemical_InventoryBNPM" FromRole="InventoryBNPM" ToRole="InventoryBNPMChemical" />
+        </EntityType>
+        <EntityType Name="InventoryBNPMChemical">
+          <Key>
+            <PropertyRef Name="InventoryBNPMChemicalId" />
+          </Key>
+          <Property Name="InventoryBNPMChemicalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InventoryBNPMId" Type="Int32" Nullable="false" />
+          <Property Name="ChemicalId" Type="Int32" Nullable="false" />
+          <Property Name="VT_ManufacturerID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VT_ChemicalID" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="VT_ChemicalNameDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="VT_BrandName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="VT_ProductModel" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="cntDisclosures" Type="Int32" />
+          <NavigationProperty Name="InventoryBNPM" Relationship="hpcdsModel.FK_InventoryBNPMChemical_InventoryBNPM" FromRole="InventoryBNPMChemical" ToRole="InventoryBNPM" />
+          <NavigationProperty Name="Chemical" Relationship="hpcdsModel.FK_InventoryBNPMChemical_Chemical" FromRole="InventoryBNPMChemical" ToRole="Chemical" />
+        </EntityType>
+        <Association Name="FK_InventoryBNPMChemical_InventoryBNPM">
+          <End Type="hpcdsModel.InventoryBNPM" Role="InventoryBNPM" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="hpcdsModel.InventoryBNPMChemical" Role="InventoryBNPMChemical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryBNPM">
+              <PropertyRef Name="InventoryBNPMId" />
+            </Principal>
+            <Dependent Role="InventoryBNPMChemical">
+              <PropertyRef Name="InventoryBNPMId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryBNPMChemical_Chemical">
+          <End Type="hpcdsModel.Chemical" Role="Chemical" Multiplicity="1" />
+          <End Type="hpcdsModel.InventoryBNPMChemical" Role="InventoryBNPMChemical" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chemical">
+              <PropertyRef Name="ChemicalId" />
+            </Principal>
+            <Dependent Role="InventoryBNPMChemical">
+              <PropertyRef Name="ChemicalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vInventoryByOrg">
+          <Key>
+            <PropertyRef Name="OrganizationId" />
+          </Key>
+          <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="cntOfBrands" Type="Int32" />
+          <Property Name="Brands" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vInventoryBnPmByChem">
+          <Key>
+            <PropertyRef Name="InventoryBNPMId" />
+            <PropertyRef Name="OrganizationId" />
+            <PropertyRef Name="ChemicalId" />
+          </Key>
+          <Property Name="InventoryBNPMId" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ChemicalId" Type="Int32" Nullable="false" />
+          <Property Name="ChemicalName" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="BrandName" Type="String" MaxLength="270" FixedLength="false" Unicode="false" />
+          <Property Name="ProductModel" Type="String" MaxLength="270" FixedLength="false" Unicode="false" />
+          <Property Name="cntDisclosures" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vSearchReport">
+          <Key>
+            <PropertyRef Name="OrganizationName" />
+            <PropertyRef Name="ProductBrickDescription" />
+            <PropertyRef Name="ProductClassDescription" />
+            <PropertyRef Name="ProductFamilyDescription" />
+            <PropertyRef Name="ProductSegmentDescription" />
+            <PropertyRef Name="ComponentName" />
+            <PropertyRef Name="ChemicalName" />
+            <PropertyRef Name="ConcentrationCategoryName" />
+            <PropertyRef Name="ChemicalFunctionName" />
+            <PropertyRef Name="States" />
+            <PropertyRef Name="SelectedCompany" />
+            <PropertyRef Name="SelectedComponent" />
+            <PropertyRef Name="Chemicals" />
+            <PropertyRef Name="SelectedFunction" />
+          </Key>
+          <Property Name="OrganizationName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ContactUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DUNSNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="StateProv" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCodeNumber" Type="String" MaxLength="24" FixedLength="false" Unicode="true" />
+          <Property Name="CountryCd" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ProductBrickDescription" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ProductClassDescription" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ProductFamilyDescription" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ProductSegmentDescription" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="ComponentName" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="InaccessibleComponent" Type="Boolean" />
+          <Property Name="ProductBrandName" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ProductModel" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="UnitSoldInOR" Type="Int32" />
+          <Property Name="UnitOfferedForSale" Type="Int32" />
+          <Property Name="AttachedFiles" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="ChemicalName" Type="String" Nullable="false" MaxLength="254" FixedLength="false" Unicode="false" />
+          <Property Name="CASNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ConcentrationCategoryName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ChemicalFunctionName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="States" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Period" Type="Int32" />
+          <Property Name="SubmittedDate" Type="DateTime" Precision="3" />
+          <Property Name="SelectedCompany" Type="Int32" Nullable="false" />
+          <Property Name="TargetAgeGroupDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProductBricks" Type="Int32" />
+          <Property Name="SelectedComponent" Type="Int32" Nullable="false" />
+          <Property Name="Chemicals" Type="Int32" Nullable="false" />
+          <Property Name="SelectedFunction" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vInventoryBnPmWithChem">
+          <Key>
+            <PropertyRef Name="InventoryBNPMId" />
+          </Key>
+          <Property Name="InventoryBNPMId" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationId" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BrandName" Type="String" MaxLength="270" FixedLength="false" Unicode="false" />
+          <Property Name="ProductModel" Type="String" MaxLength="270" FixedLength="false" Unicode="false" />
+          <Property Name="ChemicalNames" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rownum" Type="Int64" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hpcdsModelStoreContainer" CdmEntityContainer="hpcdsDbContext">
+          <EntitySetMapping Name="Chemicals">
+            <EntityTypeMapping TypeName="hpcdsModel.Chemical">
+              <MappingFragment StoreEntitySet="Chemical">
+                <ScalarProperty Name="ChemicalId" ColumnName="ChemicalId" />
+                <ScalarProperty Name="ChemicalName" ColumnName="ChemicalName" />
+                <ScalarProperty Name="CASNumber" ColumnName="CASNumber" />
+                <ScalarProperty Name="EuropeanCommissionNumber" ColumnName="EuropeanCommissionNumber" />
+                <ScalarProperty Name="EPAIdentifier" ColumnName="EPAIdentifier" />
+                <ScalarProperty Name="IsSingleChemicalFlag" ColumnName="IsSingleChemicalFlag" />
+                <ScalarProperty Name="IsVisibleFlag" ColumnName="IsVisibleFlag" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CASNumberSortValue" ColumnName="CASNumberSortValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChemicalFunctions">
+            <EntityTypeMapping TypeName="hpcdsModel.ChemicalFunction">
+              <MappingFragment StoreEntitySet="ChemicalFunction">
+                <ScalarProperty Name="ChemicalFunctionId" ColumnName="ChemicalFunctionId" />
+                <ScalarProperty Name="ChemicalFunctionName" ColumnName="ChemicalFunctionName" />
+                <ScalarProperty Name="IsVisibleFlag" ColumnName="IsVisibleFlag" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Components">
+            <EntityTypeMapping TypeName="hpcdsModel.Component">
+              <MappingFragment StoreEntitySet="Component">
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
+                <ScalarProperty Name="IsVisibleFlag" ColumnName="IsVisibleFlag" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConcentrationCategories">
+            <EntityTypeMapping TypeName="hpcdsModel.ConcentrationCategory">
+              <MappingFragment StoreEntitySet="ConcentrationCategory">
+                <ScalarProperty Name="VT_Concentration" ColumnName="VT_Concentration" />
+                <ScalarProperty Name="ConcentrationCategoryId" ColumnName="ConcentrationCategoryId" />
+                <ScalarProperty Name="ConcentrationCategoryName" ColumnName="ConcentrationCategoryName" />
+                <ScalarProperty Name="IsVisibleFlag" ColumnName="IsVisibleFlag" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSPAOrganizations">
+            <EntityTypeMapping TypeName="hpcdsModel.CSPAOrganization">
+              <MappingFragment StoreEntitySet="CSPAOrganization">
+                <ScalarProperty Name="AffiliationOrganizationId" ColumnName="AffiliationOrganizationId" />
+                <ScalarProperty Name="OrganizationPIN" ColumnName="OrganizationPIN" />
+                <ScalarProperty Name="AccountablePartyFlag" ColumnName="AccountablePartyFlag" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="IsSupplierConfidentialFlag" ColumnName="IsSupplierConfidentialFlag" />
+                <ScalarProperty Name="RequestSupplierConfidentialDatetime" ColumnName="RequestSupplierConfidentialDatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="hpcdsModel.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="ReportAccountableOrganizationId" ColumnName="ReportAccountableOrganizationId" />
+                <ScalarProperty Name="DocumentTitle" ColumnName="DocumentTitle" />
+                <ScalarProperty Name="PrimaryDocumentFlag" ColumnName="PrimaryDocumentFlag" />
+                <ScalarProperty Name="DocumentData" ColumnName="DocumentData" />
+                <ScalarProperty Name="DocumentExtension" ColumnName="DocumentExtension" />
+                <ScalarProperty Name="DocumentSize" ColumnName="DocumentSize" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrganizationRelationships">
+            <EntityTypeMapping TypeName="hpcdsModel.OrganizationRelationship">
+              <MappingFragment StoreEntitySet="OrganizationRelationship">
+                <ScalarProperty Name="OrganizationRelationshipId" ColumnName="OrganizationRelationshipId" />
+                <ScalarProperty Name="ReportingOrganizationId" ColumnName="ReportingOrganizationId" />
+                <ScalarProperty Name="AccountableOrganizationId" ColumnName="AccountableOrganizationId" />
+                <ScalarProperty Name="BlockedFlag" ColumnName="BlockedFlag" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductBricks">
+            <EntityTypeMapping TypeName="hpcdsModel.ProductBrick">
+              <MappingFragment StoreEntitySet="ProductBrick">
+                <ScalarProperty Name="ProductBrickId" ColumnName="ProductBrickId" />
+                <ScalarProperty Name="ProductBrickCode" ColumnName="ProductBrickCode" />
+                <ScalarProperty Name="ProductBrickDescription" ColumnName="ProductBrickDescription" />
+                <ScalarProperty Name="ProductClassId" ColumnName="ProductClassId" />
+                <ScalarProperty Name="IsVisibleFlag" ColumnName="IsVisibleFlag" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductClasses">
+            <EntityTypeMapping TypeName="hpcdsModel.ProductClass">
+              <MappingFragment StoreEntitySet="ProductClass">
+                <ScalarProperty Name="ProductClassId" ColumnName="ProductClassId" />
+                <ScalarProperty Name="ProductClassCode" ColumnName="ProductClassCode" />
+                <ScalarProperty Name="ProductClassDescription" ColumnName="ProductClassDescription" />
+                <ScalarProperty Name="ProductFamilyId" ColumnName="ProductFamilyId" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductFamilies">
+            <EntityTypeMapping TypeName="hpcdsModel.ProductFamily">
+              <MappingFragment StoreEntitySet="ProductFamily">
+                <ScalarProperty Name="ProductFamilyId" ColumnName="ProductFamilyId" />
+                <ScalarProperty Name="ProductFamilyCode" ColumnName="ProductFamilyCode" />
+                <ScalarProperty Name="ProductFamilyDescription" ColumnName="ProductFamilyDescription" />
+                <ScalarProperty Name="ProductSegmentId" ColumnName="ProductSegmentId" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductSegments">
+            <EntityTypeMapping TypeName="hpcdsModel.ProductSegment">
+              <MappingFragment StoreEntitySet="ProductSegment">
+                <ScalarProperty Name="ProductSegmentId" ColumnName="ProductSegmentId" />
+                <ScalarProperty Name="ProductSegmentCode" ColumnName="ProductSegmentCode" />
+                <ScalarProperty Name="ProductSegmentDescription" ColumnName="ProductSegmentDescription" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PublicViewableDateSettings">
+            <EntityTypeMapping TypeName="hpcdsModel.PublicViewableDateSetting">
+              <MappingFragment StoreEntitySet="PublicViewableDateSetting">
+                <ScalarProperty Name="PublicViewableDateId" ColumnName="PublicViewableDateId" />
+                <ScalarProperty Name="PublicViewableDate" ColumnName="PublicViewableDate" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="hpcdsModel.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="VT_ReportId" ColumnName="VT_ReportId" />
+                <ScalarProperty Name="WA_ReportId" ColumnName="WA_ReportId" />
+                <ScalarProperty Name="ReportingState" ColumnName="ReportingState" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="ProductBrickId" ColumnName="ProductBrickId" />
+                <ScalarProperty Name="ReporterOrganizationId" ColumnName="ReporterOrganizationId" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CopiedFromReportId" ColumnName="CopiedFromReportId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportAccountableOrganizations">
+            <EntityTypeMapping TypeName="hpcdsModel.ReportAccountableOrganization">
+              <MappingFragment StoreEntitySet="ReportAccountableOrganization">
+                <ScalarProperty Name="ReportAccountableOrganizationId" ColumnName="ReportAccountableOrganizationId" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="AccountableOrganizationId" ColumnName="AccountableOrganizationId" />
+                <ScalarProperty Name="TargetAgeGroupDescription" ColumnName="TargetAgeGroupDescription" />
+                <ScalarProperty Name="RequestedConfidentialFlag" ColumnName="RequestedConfidentialFlag" />
+                <ScalarProperty Name="IsConfidentialFlag" ColumnName="IsConfidentialFlag" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportDetails">
+            <EntityTypeMapping TypeName="hpcdsModel.ReportDetail">
+              <MappingFragment StoreEntitySet="ReportDetail">
+                <ScalarProperty Name="ReportDetailId" ColumnName="ReportDetailId" />
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="ComponentId" ColumnName="ComponentId" />
+                <ScalarProperty Name="ChemicalId" ColumnName="ChemicalId" />
+                <ScalarProperty Name="ChemicalFunctionId" ColumnName="ChemicalFunctionId" />
+                <ScalarProperty Name="ConcentrationCategoryId" ColumnName="ConcentrationCategoryId" />
+                <ScalarProperty Name="ConcentrationValue" ColumnName="ConcentrationValue" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAccounts">
+            <EntityTypeMapping TypeName="hpcdsModel.UserAccount">
+              <MappingFragment StoreEntitySet="UserAccount">
+                <ScalarProperty Name="UserAccountId" ColumnName="UserAccountId" />
+                <ScalarProperty Name="AffiliationId" ColumnName="AffiliationId" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="DeletedAccountFlag" ColumnName="DeletedAccountFlag" />
+                <ScalarProperty Name="BannedAccountFlag" ColumnName="BannedAccountFlag" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="BannedReasonDescription" ColumnName="BannedReasonDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="hpcdsModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="ProductBrickId" ColumnName="ProductBrickId" />
+                <ScalarProperty Name="ProductBrickCode" ColumnName="ProductBrickCode" />
+                <ScalarProperty Name="ProductBrickDescription" ColumnName="ProductBrickDescription" />
+                <ScalarProperty Name="ProductClassCode" ColumnName="ProductClassCode" />
+                <ScalarProperty Name="ProductClassDescription" ColumnName="ProductClassDescription" />
+                <ScalarProperty Name="ProductFamilyCode" ColumnName="ProductFamilyCode" />
+                <ScalarProperty Name="ProductFamilyDescription" ColumnName="ProductFamilyDescription" />
+                <ScalarProperty Name="ProductSegmentCode" ColumnName="ProductSegmentCode" />
+                <ScalarProperty Name="ProductSegmentDescription" ColumnName="ProductSegmentDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vQuestions">
+            <EntityTypeMapping TypeName="hpcdsModel.vQuestion">
+              <MappingFragment StoreEntitySet="vQuestions">
+                <ScalarProperty Name="Questions" ColumnName="Questions" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vUserRoles">
+            <EntityTypeMapping TypeName="hpcdsModel.vUserRole">
+              <MappingFragment StoreEntitySet="vUserRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vOrganizations">
+            <EntityTypeMapping TypeName="hpcdsModel.vOrganization">
+              <MappingFragment StoreEntitySet="vOrganizations">
+                <ScalarProperty Name="AddressType" ColumnName="AddressType" />
+                <ScalarProperty Name="CountryCd" ColumnName="CountryCd" />
+                <ScalarProperty Name="PostalCodeNumber" ColumnName="PostalCodeNumber" />
+                <ScalarProperty Name="StateProv" ColumnName="StateProv" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DUNSNumber" ColumnName="DUNSNumber" />
+                <ScalarProperty Name="ContactUserId" ColumnName="ContactUserId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LegacyWaPins" ColumnName="LegacyWaPins" />
+                <ScalarProperty Name="IsLegacy" ColumnName="IsLegacy" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="L_Country">
+            <EntityTypeMapping TypeName="hpcdsModel.L_Country">
+              <MappingFragment StoreEntitySet="L_Country">
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="L_State">
+            <EntityTypeMapping TypeName="hpcdsModel.L_State">
+              <MappingFragment StoreEntitySet="L_State">
+                <ScalarProperty Name="UPDATED_ON" ColumnName="UPDATED_ON" />
+                <ScalarProperty Name="UPDATED_BY" ColumnName="UPDATED_BY" />
+                <ScalarProperty Name="FIPSCode" ColumnName="FIPSCode" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="AlphaCode" ColumnName="AlphaCode" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryBNPMs">
+            <EntityTypeMapping TypeName="hpcdsModel.InventoryBNPM">
+              <MappingFragment StoreEntitySet="InventoryBNPM">
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedByName" ColumnName="ModifiedByName" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+                <ScalarProperty Name="cntOfChemicals" ColumnName="cntOfChemicals" />
+                <ScalarProperty Name="cntOfModels" ColumnName="cntOfModels" />
+                <ScalarProperty Name="cntOfBrands" ColumnName="cntOfBrands" />
+                <ScalarProperty Name="VT_ManufacturerName" ColumnName="VT_ManufacturerName" />
+                <ScalarProperty Name="VT_ManufacturerID" ColumnName="VT_ManufacturerID" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="ProductModel" ColumnName="ProductModel" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="InventoryBNPMId" ColumnName="InventoryBNPMId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryBNPMChemicals">
+            <EntityTypeMapping TypeName="hpcdsModel.InventoryBNPMChemical">
+              <MappingFragment StoreEntitySet="InventoryBNPMChemical">
+                <ScalarProperty Name="cntDisclosures" ColumnName="cntDisclosures" />
+                <ScalarProperty Name="VT_ProductModel" ColumnName="VT_ProductModel" />
+                <ScalarProperty Name="VT_BrandName" ColumnName="VT_BrandName" />
+                <ScalarProperty Name="VT_ChemicalNameDescription" ColumnName="VT_ChemicalNameDescription" />
+                <ScalarProperty Name="VT_ChemicalID" ColumnName="VT_ChemicalID" />
+                <ScalarProperty Name="VT_ManufacturerID" ColumnName="VT_ManufacturerID" />
+                <ScalarProperty Name="ChemicalId" ColumnName="ChemicalId" />
+                <ScalarProperty Name="InventoryBNPMId" ColumnName="InventoryBNPMId" />
+                <ScalarProperty Name="InventoryBNPMChemicalId" ColumnName="InventoryBNPMChemicalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vInventoryByOrgs">
+            <EntityTypeMapping TypeName="hpcdsModel.vInventoryByOrg">
+              <MappingFragment StoreEntitySet="vInventoryByOrg">
+                <ScalarProperty Name="Brands" ColumnName="Brands" />
+                <ScalarProperty Name="cntOfBrands" ColumnName="cntOfBrands" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vInventoryBnPmByChems">
+            <EntityTypeMapping TypeName="hpcdsModel.vInventoryBnPmByChem">
+              <MappingFragment StoreEntitySet="vInventoryBnPmByChem">
+                <ScalarProperty Name="cntDisclosures" ColumnName="cntDisclosures" />
+                <ScalarProperty Name="ProductModel" ColumnName="ProductModel" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="ChemicalName" ColumnName="ChemicalName" />
+                <ScalarProperty Name="ChemicalId" ColumnName="ChemicalId" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="InventoryBNPMId" ColumnName="InventoryBNPMId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vSearchReports">
+            <EntityTypeMapping TypeName="hpcdsModel.vSearchReport">
+              <MappingFragment StoreEntitySet="vSearchReport">
+                <ScalarProperty Name="SelectedFunction" ColumnName="SelectedFunction" />
+                <ScalarProperty Name="Chemicals" ColumnName="Chemicals" />
+                <ScalarProperty Name="SelectedComponent" ColumnName="SelectedComponent" />
+                <ScalarProperty Name="ProductBricks" ColumnName="ProductBricks" />
+                <ScalarProperty Name="TargetAgeGroupDescription" ColumnName="TargetAgeGroupDescription" />
+                <ScalarProperty Name="SelectedCompany" ColumnName="SelectedCompany" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="States" ColumnName="States" />
+                <ScalarProperty Name="ChemicalFunctionName" ColumnName="ChemicalFunctionName" />
+                <ScalarProperty Name="ConcentrationCategoryName" ColumnName="ConcentrationCategoryName" />
+                <ScalarProperty Name="CASNumber" ColumnName="CASNumber" />
+                <ScalarProperty Name="ChemicalName" ColumnName="ChemicalName" />
+                <ScalarProperty Name="AttachedFiles" ColumnName="AttachedFiles" />
+                <ScalarProperty Name="UnitOfferedForSale" ColumnName="UnitOfferedForSale" />
+                <ScalarProperty Name="UnitSoldInOR" ColumnName="UnitSoldInOR" />
+                <ScalarProperty Name="ProductModel" ColumnName="ProductModel" />
+                <ScalarProperty Name="ProductBrandName" ColumnName="ProductBrandName" />
+                <ScalarProperty Name="InaccessibleComponent" ColumnName="InaccessibleComponent" />
+                <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
+                <ScalarProperty Name="ProductSegmentDescription" ColumnName="ProductSegmentDescription" />
+                <ScalarProperty Name="ProductFamilyDescription" ColumnName="ProductFamilyDescription" />
+                <ScalarProperty Name="ProductClassDescription" ColumnName="ProductClassDescription" />
+                <ScalarProperty Name="ProductBrickDescription" ColumnName="ProductBrickDescription" />
+                <ScalarProperty Name="CountryCd" ColumnName="CountryCd" />
+                <ScalarProperty Name="PostalCodeNumber" ColumnName="PostalCodeNumber" />
+                <ScalarProperty Name="StateProv" ColumnName="StateProv" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DUNSNumber" ColumnName="DUNSNumber" />
+                <ScalarProperty Name="ContactUserId" ColumnName="ContactUserId" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vInventoryBnPmWithChems">
+            <EntityTypeMapping TypeName="hpcdsModel.vInventoryBnPmWithChem">
+              <MappingFragment StoreEntitySet="vInventoryBnPmWithChem">
+                <ScalarProperty Name="rownum" ColumnName="rownum" />
+                <ScalarProperty Name="ChemicalNames" ColumnName="ChemicalNames" />
+                <ScalarProperty Name="ProductModel" ColumnName="ProductModel" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="OrganizationId" ColumnName="OrganizationId" />
+                <ScalarProperty Name="InventoryBNPMId" ColumnName="InventoryBNPMId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
