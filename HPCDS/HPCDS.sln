@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPCDS.Resources", "HPCDS.Re
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPCDS.Products", "HPCDS.Products\HPCDS.Products.csproj", "{DFC026D4-E851-4CE2-B2E8-09C4BCAFE095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPCDS.OData.API", "HPCDS.OData.API\HPCDS.OData.API.csproj", "{C39008A6-1719-4E9C-8F49-EB78A23E222D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HPCDS.OData.WebAPI", "HPCDS.OData.WebAPI\HPCDS.OData.WebAPI.csproj", "{09F3DC0E-82EE-4C3E-970A-66960D37BF8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{DFC026D4-E851-4CE2-B2E8-09C4BCAFE095}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFC026D4-E851-4CE2-B2E8-09C4BCAFE095}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFC026D4-E851-4CE2-B2E8-09C4BCAFE095}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C39008A6-1719-4E9C-8F49-EB78A23E222D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C39008A6-1719-4E9C-8F49-EB78A23E222D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C39008A6-1719-4E9C-8F49-EB78A23E222D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C39008A6-1719-4E9C-8F49-EB78A23E222D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09F3DC0E-82EE-4C3E-970A-66960D37BF8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09F3DC0E-82EE-4C3E-970A-66960D37BF8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09F3DC0E-82EE-4C3E-970A-66960D37BF8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09F3DC0E-82EE-4C3E-970A-66960D37BF8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
